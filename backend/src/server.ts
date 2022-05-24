@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import { router } from './routes/routes';
+import { router } from './routes';
 import { AppError } from './config/errors/AppError';
 import cors from 'cors';
 
@@ -12,6 +12,7 @@ app.use(cors());
 app.use(router);
 
 app.use(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
       return response.status(error.statusCode).json({
