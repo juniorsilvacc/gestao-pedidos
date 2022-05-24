@@ -4,13 +4,13 @@ import { sign } from 'jsonwebtoken';
 import { AppError } from '../../config/errors/AppError';
 import auth from '../../config/auth';
 
-interface IAuthRequest {
+interface IRequest {
   email: string;
   password: string;
 }
 
 class AuthUserService {
-  async execute({ email, password }: IAuthRequest) {
+  async execute({ email, password }: IRequest) {
     const user = await prismaClient.user.findFirst({
       where: { email },
     });
@@ -30,17 +30,14 @@ class AuthUserService {
       expiresIn: auth.jwt.expiresIn,
     });
 
-    const returnToken = {
+    return {
       user: {
         id: user.id,
         name: user.name,
         email: user.email,
+        token,
       },
-
-      token,
     };
-
-    return returnToken;
   }
 }
 
