@@ -1,6 +1,8 @@
 import prismaClient from '../../prisma';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 import { AppError } from '../../config/errors/AppError';
+import auth from '../../config/auth';
 
 interface IAuthRequest {
   email: string;
@@ -23,7 +25,22 @@ class AuthUserService {
       throw new AppError('Email or password incorrect');
     }
 
-    return user;
+    const token = sign({}, auth.jwt.secret, {
+      subject: user.id,
+      expiresIn: auth.jwt.expiresIn,
+    });
+
+    const returnToken = {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+
+      token,
+    };
+
+    return returnToken;
   }
 }
 
