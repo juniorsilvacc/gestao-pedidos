@@ -17,7 +17,7 @@ class CreateCategoryService {
       data: {
         name,
       },
-      select: { name: true },
+      select: { id: true, name: true },
     });
 
     return create;

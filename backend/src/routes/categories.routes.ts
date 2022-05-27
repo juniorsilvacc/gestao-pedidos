@@ -5,16 +5,19 @@ import ensureAutenticated from '../middlewares/ensureAutenticated';
 
 const categoriesRouter = Router();
 
+const createCategoryController = new CreateCategoryController();
+const listAllCategoriesContreller = new ListAllCategoriesContreller();
+
 categoriesRouter.post(
   '/create',
   ensureAutenticated,
-  new CreateCategoryController().handle,
+  createCategoryController.handle,
 );
 
 categoriesRouter.get(
   '/list',
   ensureAutenticated,
-  new ListAllCategoriesContreller().handle,
+  listAllCategoriesContreller.handle,
 );
 
 export { categoriesRouter };

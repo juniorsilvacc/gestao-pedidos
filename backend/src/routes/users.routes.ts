@@ -6,13 +6,12 @@ import ensureAutenticated from '../middlewares/ensureAutenticated';
 
 const usersRouter = Router();
 
-usersRouter.post('/register', new CreateUserController().handle);
-usersRouter.post('/login', new AuthUserController().handle);
+const createUserController = new CreateUserController();
+const authUserController = new AuthUserController();
+const detailUserController = new DetailUserController();
 
-usersRouter.get(
-  '/details',
-  ensureAutenticated,
-  new DetailUserController().handle,
-);
+usersRouter.post('/register', createUserController.handle);
+usersRouter.post('/login', authUserController.handle);
+usersRouter.get('/details', ensureAutenticated, detailUserController.handle);
 
 export { usersRouter };
