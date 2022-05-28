@@ -12,6 +12,13 @@ class CreateOrderService {
         table,
         name,
       },
+      select: {
+        id: true,
+        table: true,
+        status: true,
+        draft: true,
+        name: true,
+      },
     });
 
     return order;
