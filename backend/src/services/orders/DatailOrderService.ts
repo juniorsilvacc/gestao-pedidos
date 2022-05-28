@@ -4,7 +4,7 @@ interface IRequest {
   order_id: string;
 }
 
-class FindByOrderService {
+class DatailOrderService {
   async execute({ order_id }: IRequest) {
     const order = await prismaClient.item.findMany({
       where: { order_id },
@@ -18,4 +18,4 @@ class FindByOrderService {
   }
 }
 
-export { FindByOrderService };
+export { DatailOrderService };
