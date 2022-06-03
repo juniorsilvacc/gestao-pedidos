@@ -1,3 +1,47 @@
-.container{
-  color: red;
+.containerCenter{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ margin: 0 auto;
+ width: 100%;
+ min-height: 100vh;
+ padding: 0 2rem;
+}
+
+.login{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  padding: 2rem 0 2rem 0;
+}
+
+.login form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.text{
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.text a{
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--red);
+}
+
+.text a:hover{
+  filter: brightness(1.08);
+}
+
+@media (max-width: 500px){
+  .login{
+    width: 100%;
+  }
 }
