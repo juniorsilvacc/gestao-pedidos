@@ -4,8 +4,8 @@ import { AuthTokenError } from "./errors/AuthTokensError";
 
 import { logout } from "../contexts/AuthContext";
 
-export function ApiClient(ctx = undefined) {
-  let cookies = parseCookies(ctx);
+export function ApiClient(context = undefined) {
+  let cookies = parseCookies(context);
 
   const api = axios.create({
     baseURL: "http://localhost:3333",

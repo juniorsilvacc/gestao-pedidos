@@ -57,7 +57,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password
       })
 
-      const { id, name, token } = response.data;
+      // const { id, name, token } = response.data;
+      const id = response.data
+      const name = response.data
+      const token = response.data
 
       setCookie(undefined, "@auth.token", token, {
         maxAge: 60 * 60 * 24 * 30, // 1 Mês

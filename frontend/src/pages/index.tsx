@@ -15,6 +15,9 @@ import Button from '../components/forms/Button';
 import { AuthContext } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
 
+// Utils
+import { SSRGuest } from '../utils/SSRGuest'
+
 const Home: NextPage = () => {
   const { login } = useContext(AuthContext);
 
@@ -82,3 +85,9 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export const getServerSideProps = SSRGuest(async (context) => {
+  return {
+    props: {}
+  }
+})
