@@ -57,14 +57,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password
       })
 
-      // const { id, name, token } = response.data;
-      const id = response.data
-      const name = response.data
-      const token = response.data
+      const { id, name, token } = response.data;
 
       setCookie(undefined, "@auth.token", token, {
-        maxAge: 60 * 60 * 24 * 30, // 1 Mês
-        path: "/" // Quais caminhos ter acesso aos cookies
+        maxAge: 60 * 60 * 24 * 30, // Tempo de expirar token
+        path: "/" // Quais caminhos para ter acesso ao cookie(Todos)
       })
 
       setUser({
@@ -74,7 +71,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
 
       // Passar para prox. requisições o token
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
       toast.success("Usuário logado com sucesso");
 
@@ -87,7 +84,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function register({ name, email, password }: RegisterProps) {
     try {
-      const response = await api.post("/api/users/register", {
+      await api.post("/api/users/register", {
         name,
         email,
         password
