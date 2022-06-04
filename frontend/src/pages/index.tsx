@@ -1,4 +1,4 @@
-import { useContext, FormEvent } from 'react';
+import { useContext, FormEvent, useState } from 'react';
 import type { NextPage } from 'next';
 import Head from "next/head";
 import Image from "next/image";
@@ -17,12 +17,17 @@ import { AuthContext } from '../contexts/AuthContext';
 const Home: NextPage = () => {
   const { login } = useContext(AuthContext);
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [loading, setLoading] = useState(false);
+
   async function handleLogin(e: FormEvent) {
     e.preventDefault();
 
     let data = {
-      email: 'junior@gmail.com',
-      password: '123456'
+      email,
+      password
     }
 
     await login(data)
@@ -41,12 +46,16 @@ const Home: NextPage = () => {
             <Input
               placeholder="Email"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
 
             <Input
               placeholder="Senha"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
 
