@@ -1,11 +1,11 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, HeadersDefaults } from "axios";
 import { parseCookies } from "nookies";
 import { AuthTokenError } from "./errors/AuthTokensError";
 
 import { logout } from "../contexts/AuthContext";
 
-export function ApiClient(context = undefined) {
-  let cookies = parseCookies(context);
+export function ApiClient(ctx = undefined) {
+  let cookies = parseCookies(ctx);
 
   const api = axios.create({
     baseURL: "http://localhost:3333",
