@@ -1,3 +1,4 @@
+import { useContext, FormEvent } from 'react';
 import type { NextPage } from 'next';
 import Head from "next/head";
 import Image from "next/image";
@@ -8,9 +9,25 @@ import logo from '../../public/logo.png';
 
 // Components
 import Input from '../components/forms/Input';
-import Button from '../components/forms/Button'
+import Button from '../components/forms/Button';
+
+// Hooks
+import { AuthContext } from '../contexts/AuthContext';
 
 const Home: NextPage = () => {
+  const { login } = useContext(AuthContext);
+
+  async function handleLogin(e: FormEvent) {
+    e.preventDefault();
+
+    let data = {
+      email: 'junior@gmail.com',
+      password: '123456'
+    }
+
+    await login(data)
+  }
+
   return (
     <>
       <Head>
@@ -20,7 +37,7 @@ const Home: NextPage = () => {
         <Image src={logo} alt="Logo - Gestão de Pedidos" />
 
         <div className={styles.login}>
-          <form>
+          <form onSubmit={handleLogin}>
             <Input
               placeholder="Email"
               type="email"
