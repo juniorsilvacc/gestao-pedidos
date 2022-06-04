@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
 import { destroyCookie, setCookie, parseCookies } from 'nookies';
+import { toast } from 'react-toastify';
+
 import Router from 'next/router';
 
 import { api } from '../services/apiClient';  
@@ -8,6 +10,7 @@ type AuthContextData = {
   user: UserProps | undefined;
   isAuthenticated: boolean;
   login: (credentials: LoginProps) => Promise<void>;
+  register: (credentials: RegisterProps) => Promise<void>;
   logout: () => void;
 }
 
@@ -24,6 +27,12 @@ type LoginProps = {
 
 type AuthProviderProps = {
   children: ReactNode;
+}
+
+type RegisterProps = {
+  name: string;
+  email: string;
+  password: string;
 }
 
 export const AuthContext = createContext({} as AuthContextData)
@@ -62,16 +71,37 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
 
       // Passar para prox. requisições o token
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      Router.push("/dashboard")
+      toast.success("Usuário logado com sucesso");
+
+      Router.push("/dashboard");
     } catch (error) {
+      toast.error("Error ao acessar")
       console.log(error)
     }
   }
 
+  async function register({ name, email, password }: RegisterProps) {
+    try {
+      const response = await api.post("/api/users/register", {
+        name,
+        email,
+        password
+      })
+
+      toast.success("Usuário criado com success");
+
+      Router.push("/")
+    } catch (error) {
+      toast.error("Error ao cadastrar")
+      console.log(error)
+    }
+  }
+
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, logout, register }}>
       { children }
     </AuthContext.Provider>
   )

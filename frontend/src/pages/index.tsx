@@ -13,6 +13,7 @@ import Button from '../components/forms/Button';
 
 // Hooks
 import { AuthContext } from '../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const Home: NextPage = () => {
   const { login } = useContext(AuthContext);
@@ -25,12 +26,20 @@ const Home: NextPage = () => {
   async function handleLogin(e: FormEvent) {
     e.preventDefault();
 
+    if (email === '' || password === '') {
+      return toast.warning("Preencha todos os campos")
+    }
+
+    setLoading(true);
+
     let data = {
       email,
       password
     }
     
-    await login(data)
+    await login(data);
+
+    setLoading(false);
   }
 
   return (
@@ -48,7 +57,6 @@ const Home: NextPage = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
 
             <Input
@@ -56,12 +64,11 @@ const Home: NextPage = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
 
             <Button
               type="submit"
-              Loading={false}
+              Loading={loading}
             >
               Entrar
             </Button>
