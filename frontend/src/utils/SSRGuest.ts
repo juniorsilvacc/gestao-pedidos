@@ -12,7 +12,7 @@ export function SSRGuest<P>(fn: GetServerSideProps<P>) {
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(context);
-    // Se tentar acessar a página já estando logado, tenho que redirecionar a página /dashboard
+    // Se tentar acessar a página já logado, tenho que redirecionar para a página /dashboard
     if (cookies["@auth.token"]) {
       return {
         redirect: {

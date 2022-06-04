@@ -1,4 +1,5 @@
-import React from 'react'
+// Utils
+import { SSRAuth } from '../../utils/SSRAuth'
 
 export default function dashboard() {
   return (
@@ -7,3 +8,9 @@ export default function dashboard() {
     </div>
   )
 }
+
+export const getServerSideProps = SSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})
