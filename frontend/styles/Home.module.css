@@ -40,6 +40,11 @@
   filter: brightness(1.08);
 }
 
+.title{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
 @media (max-width: 500px){
   .login{
     width: 100%;

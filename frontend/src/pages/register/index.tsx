@@ -2,25 +2,29 @@ import type { NextPage } from 'next';
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import styles from '../../styles/home.module.css';
-
-import logo from '../../public/logo.png';
+import styles from '../../../styles/home.module.css';
 
 // Components
-import Input from '../components/forms/Input';
-import Button from '../components/forms/Button'
+import Input from '../../components/forms/Input';
+import Button from '../../components/forms/Button';
 
-const Home: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Gestão de Pedidos - Faça seu Login</title>
+        <title>Gestão de Pedidos - Faça seu Cadastro</title>
       </Head>
       <div className={styles.containerCenter}>
-        <Image src={logo} alt="Logo - Gestão de Pedidos" />
+        <h1 className={styles.title}>Cadastre-se</h1>
 
         <div className={styles.login}>
           <form>
+             <Input
+              placeholder="Nome"
+              type="text"
+              required
+            />
+
             <Input
               placeholder="Email"
               type="email"
@@ -37,15 +41,15 @@ const Home: NextPage = () => {
               type="submit"
               Loading={false}
             >
-              Entrar
+              Cadastrar
             </Button>
           </form>
 
-          <p className={styles.text}>Não possui um cadastro? <Link href="/register"><a>Cadastre-se</a></Link></p>
+          <p className={styles.text}>Não possui um cadastro? <Link href="/">Entrar</Link></p>
         </div>
       </div>
     </>
   )
 }
 
-export default Home
+export default Register
