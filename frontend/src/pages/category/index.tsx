@@ -68,7 +68,7 @@ export default function Category() {
               type="submit"
               Loading={loading}
             >
-              Criar
+              Cadastrar
             </Button>
           </form>
         </div>

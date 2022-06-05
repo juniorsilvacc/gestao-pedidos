@@ -1,4 +1,4 @@
-.textArea {
+.select{
   border: 1px solid #dbdbdb;
   display: block;
   font-size: 1rem;
@@ -6,6 +6,4 @@
   border-radius: 0.4rem;
   background-color: #eee;
   margin-bottom: 1rem;
-  resize: none;
-  min-height: 120px;
 }
