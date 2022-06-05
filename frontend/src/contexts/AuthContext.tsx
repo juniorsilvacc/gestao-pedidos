@@ -37,15 +37,6 @@ type RegisterProps = {
 
 export const AuthContext = createContext({} as AuthContextData)
 
-export function logout() {
-  try {
-    destroyCookie(undefined, "@auth.token")
-    Router.push("/")
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>()
   const isAuthenticated = !!user;
@@ -121,4 +112,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
       { children }
     </AuthContext.Provider>
   )
+}
+
+export function logout() {
+  try {
+    destroyCookie(undefined, "@auth.token")
+    toast.success("Usuário deslogado");
+    Router.push("/")
+  } catch (error) {
+    console.log(error)
+  }
 }

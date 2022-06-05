@@ -1,11 +1,21 @@
+import Head from "next/head";
+
+// Components
+import Header from '../../components/header';
+
 // Utils
-import { SSRAuth } from '../../utils/SSRAuth'
+import { SSRAuth } from '../../utils/SSRAuth';
 
 export default function dashboard() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
+    <>
+      <Head>
+        <title>Gestão de Pedidos - Dashboard</title>
+      </Head>
+      <div>
+        <Header/>
+      </div>
+    </>
   )
 }
 
