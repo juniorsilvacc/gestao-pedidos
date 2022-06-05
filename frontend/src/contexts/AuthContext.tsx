@@ -84,8 +84,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       Router.push("/dashboard");
     } catch (error) {
-      toast.error("Error ao acessar")
-      console.log(error)
+      toast.error(error.response.data.message);
     }
   }
 
@@ -101,8 +100,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       Router.push("/")
     } catch (error) {
-      toast.error("Error ao cadastrar")
-      console.log(error)
+      toast.error(error.response.data.message)
     }
   }
 
