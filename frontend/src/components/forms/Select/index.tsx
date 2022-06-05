@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { SelectHTMLAttributes } from 'react'
 import styles from './styles.module.css';
 
-function Select() {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>{}
+
+function Select({...rest}: SelectProps) {
   return (
     <select
       className={styles.select}
+      {...rest}
     >
-      <option>Bebidas</option>
-      <option>Pizzas</option>
     </select>
   )
 }

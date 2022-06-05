@@ -16,9 +16,21 @@ import { toast } from "react-toastify";
 // Utils
 import { SSRAuth } from '../../utils/SSRAuth';
 
-export default function Product() {
+import { ApiClient } from '../../services/api';
 
-  const [category, setCategory] = useState([]);
+type ListProps = {
+  id: string;
+  name: string;
+}
+
+interface CategoryProps {
+  categoryList: ListProps[];
+}
+
+export default function Product({ categoryList }: CategoryProps) {
+  const [categories, setCategories] = useState(categoryList || []);
+  const [categorySelect, setCategorySelect] = useState(0)
+
   const [nameItem, setNameItem] = useState('');
   const [value, setValue] = useState('');
   const [description, setDescription] = useState('');
@@ -27,6 +39,11 @@ export default function Product() {
 
   async function handleCreateProduct(e: FormEvent) {
     e.preventDefault();  
+  }
+
+  // Selecionar nova categoria
+  function handleSelectCategory(e: any) {
+    setCategorySelect(e.target.value)
   }
 
   return (
@@ -43,7 +60,15 @@ export default function Product() {
           <form onSubmit={handleCreateProduct}>
             <File />
             
-            <Select />
+            <Select value={categorySelect} onChange={handleSelectCategory}>
+              {categories.map((item, index) => {
+                return (
+                  <option key={item.id} value={index}>
+                    {item.name}
+                  </option>
+                )
+              })}
+            </Select>
             
             <Input
               type="text"
@@ -73,7 +98,13 @@ export default function Product() {
 }
 
 export const getServerSideProps = SSRAuth(async (context) => {
+  const api = ApiClient(context); 
+
+  const response = await api.get("/api/categories/list");
+  
   return {
-    props: {}
+    props: {
+      categoryList: response.data
+    }
   }
 })
