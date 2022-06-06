@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
 import styles from './styles.module.css';
 
-export default function File() {
+export default function File({value}) {
   const [imgProductURL, setImgProductURL] = useState('');
   const [imgPreview, setImgPreview] = useState(null);
 
@@ -31,6 +30,7 @@ export default function File() {
       </span>
 
       <input
+        value={value}
         type="file"
         accept='image/png, image/jpeg, image/jpg'
         onChange={handlePreview}

@@ -20,9 +20,9 @@ export default function Category() {
   const [loading, setLoading] = useState(false);
 
   async function handleCreateCategory(e: FormEvent) {
-    try {
-      e.preventDefault();
+    e.preventDefault();
     
+    try {
       if (category === '') {
         return toast.warning("Preencha o campo");
       }
@@ -36,13 +36,13 @@ export default function Category() {
 
       toast.success("Categoria cadastrada com sucesso");
 
-      setCategory('');
-      
       setLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);
       setLoading(false);
     }
+
+    setCategory('');
   }
 
   return (
