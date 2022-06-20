@@ -1,2 +1,12 @@
-node_modules
-pgdata
+.idea/
+.vscode/
+node_modules/
+build/
+temp/
+.env
+coverage
+dist
+
+tmp
+tmp/*
+!tmp/.gitkeep

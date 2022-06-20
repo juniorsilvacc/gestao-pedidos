@@ -1,4 +1,6 @@
 import Head from "next/head";
+import styles from "./styles.module.css";
+import { FiRefreshCcw } from 'react-icons/fi'
 
 // Components
 import Header from '../../components/header';
@@ -13,7 +15,27 @@ export default function dashboard() {
         <title>Gestão de Pedidos - Dashboard</title>
       </Head>
       <div>
-        <Header/>
+        <Header />
+        
+        <main className={styles.container}>
+          <div className={styles.containerHeader}>
+            <h1 className={styles.title}>Últimos pedidos</h1>
+            <button>
+              <FiRefreshCcw color="#EA1D2C" size={25}/>
+            </button>
+          </div>
+
+          <article className={styles.orders}>
+
+            <section className={styles.orderItem}>
+              <button>
+                <div className={styles.tag}></div>
+                <span>Mesa 10</span>
+              </button>
+            </section>
+
+          </article>
+        </main>
       </div>
     </>
   )
