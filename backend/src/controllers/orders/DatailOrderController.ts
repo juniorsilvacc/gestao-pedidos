@@ -10,7 +10,7 @@ class DatailOrderController {
 
     const orders = await datailOrderService.execute({ order_id });
 
-    return response.status(200).json({ orders });
+    return response.status(200).json(orders);
   }
 }
 

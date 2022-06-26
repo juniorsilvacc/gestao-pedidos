@@ -45,6 +45,7 @@
   align-items: center;
   border-radius: .2rem;
   transition: filter 500ms;
+  margin-bottom: .8rem;
 }
 
 .orderItem button{
@@ -54,6 +55,7 @@
   color: var(--black);
   font-weight: 400;
   align-items: center;
+  
 }
 
 .orderItem:hover{

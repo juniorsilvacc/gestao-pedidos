@@ -7,7 +7,7 @@ class ListAllOrderNotDraftController {
 
     const listOrder = await listAllOrderNotDraftService.execute();
 
-    return response.status(200).json({ listOrder });
+    return response.status(200).json(listOrder);
   }
 }
 
