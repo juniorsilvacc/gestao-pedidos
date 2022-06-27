@@ -9,7 +9,7 @@ class SendOrderController {
 
     const sendOrder = await sendOrderService.execute({ order_id });
 
-    return response.status(200).json({ sendOrder });
+    return response.status(200).json(sendOrder);
   }
 }
 

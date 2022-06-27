@@ -9,7 +9,7 @@ class CreateOrderController {
 
     const order = await createOrderService.execute({ table, name });
 
-    return response.status(201).json({ order });
+    return response.status(201).json(order);
   }
 }
 

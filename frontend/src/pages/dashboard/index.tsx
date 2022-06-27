@@ -25,7 +25,7 @@ type ListOrdersProps = {
 }
 
 interface OrdersProps {
-  ordersList: ListOrdersProps[];
+  orders: ListOrdersProps[];
 }
 
 export type OrderItemProps = {
@@ -48,11 +48,15 @@ export type OrderItemProps = {
   }
 }
 
-export default function Dashboard({ ordersList }: OrdersProps) {
-  const [orders, setOrders] = useState(ordersList || []);
+export default function Dashboard({ orders }: OrdersProps) {
+  const [ordersList, setOrdersList] = useState(orders || []);
 
   const [modaItem, setModalItem] = useState<OrderItemProps[]>();
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  function handleCloseModal() {
+    setIsOpen(false);
+  }
 
   async function handleOpenModal(id: string) {
     const api = ApiClient();
@@ -64,12 +68,8 @@ export default function Dashboard({ ordersList }: OrdersProps) {
     })
 
     setModalItem(response.data);
-    console.log(response.data)
-    setIsOpen(true);
-  }
 
-  function handleCloseModal() {
-    setIsOpen(false);
+    setIsOpen(true);
   }
 
   Modal.setAppElement('#__next');
@@ -104,7 +104,7 @@ export default function Dashboard({ ordersList }: OrdersProps) {
           </article>
         </main>
 
-        {setIsOpen && (
+        {modalIsOpen && (
           <ModalOrder
             isOpen={modalIsOpen}
             onRequestClose={handleCloseModal}
@@ -124,7 +124,7 @@ export const getServerSideProps = SSRAuth(async (context) => {
 
   return {
     props: {
-      ordersList: response.data
+      orders: response.data
     }
   }
 })

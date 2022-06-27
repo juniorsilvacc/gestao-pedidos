@@ -9,7 +9,7 @@ class CloseOrderController {
 
     await closeOrderService.execute({ order_id: id });
 
-    return response.status(204).json({});
+    return response.status(204).json();
   }
 }
 

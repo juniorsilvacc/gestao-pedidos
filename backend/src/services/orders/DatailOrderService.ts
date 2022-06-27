@@ -7,7 +7,7 @@ interface IRequest {
 class DatailOrderService {
   async execute({ order_id }: IRequest) {
     const order = await prismaClient.item.findMany({
-      where: { order_id },
+      where: { order_id: order_id },
       include: {
         product: true,
         order: true,

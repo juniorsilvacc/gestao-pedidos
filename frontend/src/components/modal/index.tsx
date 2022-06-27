@@ -32,25 +32,34 @@ export default function ModalOrder({ isOpen, onRequestClose, order }: ModelOderP
       style={customStyles}
     >
       <button
-        type='button'
+        type="button"
         onClick={onRequestClose}
         className="react-modal-close"
         style={{background: 'transparent', border: 0}}
       >
-        <FiX size={45} color='#EA1D2C' />
+        <FiX size={35} color='#EA1D2C' />
       </button>
 
       <div className={styles.container}>
         <h1 className={styles.details}>Detalhes do Pedido</h1>
-        {/* <span className={styles.table}>
+        <span className={styles.table}>
           Mesa: <strong>{order[0].order.table}</strong>
         </span>
 
         {order.map(item => (
-          <section key={item.id}>
-            <span>{item.amount} - { item.product.name }</span>
+          <section key={item.id} className={styles.containerItem}>
+            <span className={styles.amount}>{item.amount} - <strong>{item.product.name}</strong></span>
+            <span className={styles.description}>{ item.product.description }</span>
           </section>
-        ))} */}
+        ))}
+
+        
+      </div>
+
+      <div className={styles.buttonConclude}>
+        <button className={styles.conclude}>
+          Concluir
+        </button>
       </div>
     </Modal>
   );

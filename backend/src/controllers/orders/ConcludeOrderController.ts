@@ -9,7 +9,7 @@ class ConcludeOrderController {
 
     const concludeOrder = await concludeOrderService.execute({ order_id });
 
-    return response.status(200).json({ concludeOrder });
+    return response.status(200).json(concludeOrder);
   }
 }
 
