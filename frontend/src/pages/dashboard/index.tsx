@@ -72,6 +72,29 @@ export default function Dashboard({ orders }: OrdersProps) {
     setIsOpen(true);
   }
 
+  async function handleFinishItem(id: string) {
+    const api = ApiClient();
+
+    await api.put('/api/orders/end', {
+      order_id: id,
+    }) 
+
+    const response = await api.get('/api/orders/list');
+
+    setOrdersList(response.data);
+
+    setIsOpen(false);
+  }
+
+  async function handleRefresh() {
+    // location.reload();
+    const api = ApiClient();
+
+    const response = await api.get('/api/orders/list')
+
+    setOrdersList(response.data);
+  }
+
   Modal.setAppElement('#__next');
 
   return (
@@ -85,7 +108,7 @@ export default function Dashboard({ orders }: OrdersProps) {
         <main className={styles.container}>
           <div className={styles.containerHeader}>
             <h1 className={styles.title}>Últimos pedidos</h1>
-            <button>
+            <button onClick={handleRefresh}>
               <FiRefreshCcw color="#EA1D2C" size={25}/>
             </button>
           </div>
@@ -101,6 +124,10 @@ export default function Dashboard({ orders }: OrdersProps) {
               </section>
             ))}
 
+            {ordersList.length === 0 && (
+              <span className={styles.empty}>Não tem pedidos</span>
+            )}
+
           </article>
         </main>
 
@@ -109,6 +136,7 @@ export default function Dashboard({ orders }: OrdersProps) {
             isOpen={modalIsOpen}
             onRequestClose={handleCloseModal}
             order={modaItem}
+            handleFinishOrder={handleFinishItem}
           />
         )}
 

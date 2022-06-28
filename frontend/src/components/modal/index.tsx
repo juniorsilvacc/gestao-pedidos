@@ -9,9 +9,10 @@ interface ModelOderProps{
   isOpen: boolean;
   onRequestClose: () => void;
   order: OrderItemProps[];
+  handleFinishOrder: (id: string) => void;
 }
 
-export default function ModalOrder({ isOpen, onRequestClose, order }: ModelOderProps) {
+export default function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }: ModelOderProps) {
   
   const customStyles = {
     content: {
@@ -57,7 +58,7 @@ export default function ModalOrder({ isOpen, onRequestClose, order }: ModelOderP
       </div>
 
       <div className={styles.buttonConclude}>
-        <button className={styles.conclude}>
+        <button className={styles.conclude} onClick={() => handleFinishOrder(order[0].order_id)}>
           Concluir
         </button>
       </div>

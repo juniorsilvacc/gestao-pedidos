@@ -3,7 +3,6 @@ import { DatailOrderService } from '../../services/orders/DatailOrderService';
 
 class DatailOrderController {
   async handle(request: Request, response: Response) {
-    // const { order_id } = request.params;
     const order_id = request.query.order_id as string;
 
     const datailOrderService = new DatailOrderService();

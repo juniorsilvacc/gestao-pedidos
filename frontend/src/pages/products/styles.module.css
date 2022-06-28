@@ -1,0 +1,15 @@
+.container {
+  max-width: 880px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+}
