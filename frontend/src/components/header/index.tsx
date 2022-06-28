@@ -16,7 +16,9 @@ export default function Header() {
       <div className={styles.content}>
         <div className={styles.menu}>
           <Link href="/dashboard">
-            <Image width={180} height={40} src={headerLogo} alt="Header Logo - Gestão de Pedidos" />
+            <div className={styles.img}>
+              <Image  width={180} height={40} src={headerLogo} alt="Header Logo - Gestão de Pedidos" />
+            </div>
           </Link>
 
           <Link href="/category">

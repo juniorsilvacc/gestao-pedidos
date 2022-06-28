@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./styles.module.css";
 import Head from "next/head";
 
@@ -11,8 +11,23 @@ import { SSRAuth } from '../../utils/SSRAuth';
 // api
 import { ApiClient } from '../../services/api';
 
+type ListProductsProps = {
+  id: string;
+  name: string;
+  price: string;
+  description: string;
+  banner: string;
+  category_id: string;
+}
 
-export default function Products() {
+interface ProductsProps{
+  products: ListProductsProps[];
+}
+
+
+export default function Products({ products }: ProductsProps) {
+  const [productsList, setProductsList] = useState(products || []);
+
   return (
     <>
       <Head>
@@ -22,8 +37,21 @@ export default function Products() {
       <div>
         <Header />
 
+        <h1 className={styles.title}>Todos os Produtos</h1>
+        
         <main className={styles.container}>
-          <h1 className={styles.title}>Todos os produtos</h1>
+          
+
+          {productsList.map(item => (
+            <div key={item.id} className={styles.containerItem}>
+              <div className={styles.item}>
+                <img src={`http://localhost:3333/public/${item.banner}`} alt={item.name} />
+                <h1 className={styles.name}>{item.name}</h1>
+                <p className={styles.price}>R$ {item.price},00</p>
+              </div>
+            </div>
+          ))}
+
         </main>
       </div>
     </>

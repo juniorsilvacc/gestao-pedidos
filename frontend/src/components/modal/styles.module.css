@@ -3,13 +3,16 @@
 }
 
 .details{
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   margin: 1rem 0;
   text-align: center;
 }
 
 .table{
   font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6rem;
 }
 
 .containerItem{

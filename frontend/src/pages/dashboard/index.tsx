@@ -87,7 +87,6 @@ export default function Dashboard({ orders }: OrdersProps) {
   }
 
   async function handleRefresh() {
-    // location.reload();
     const api = ApiClient();
 
     const response = await api.get('/api/orders/list')
@@ -118,8 +117,7 @@ export default function Dashboard({ orders }: OrdersProps) {
             {ordersList.map(item => (
               <section key={item.id} className={styles.orderItem}>
                 <button onClick={() => handleOpenModal(item.id)}>
-                  <div className={styles.tag}></div>
-                  <span>Mesa { item.table }</span>
+                  <p>Nº da Mesa: { item.table }</p> 
                 </button>
               </section>
             ))}
