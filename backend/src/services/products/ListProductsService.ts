@@ -14,7 +14,7 @@ class ListProductsService {
     });
 
     if (!findByCategoryId) {
-      throw new AppError('Products not found');
+      throw new AppError('Produto não encontrado');
     }
 
     return findByCategoryId;

@@ -10,7 +10,7 @@ class CreateCategoryService {
     const category = await prismaClient.category.findFirst({ where: { name } });
 
     if (category) {
-      throw new AppError('Category already exists');
+      throw new AppError('Categoria existente');
     }
 
     const create = await prismaClient.category.create({

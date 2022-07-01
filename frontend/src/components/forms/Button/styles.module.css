@@ -1,0 +1,28 @@
+.button{
+  padding: .8rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  background: var(--red);
+  transition: filter 300ms;
+}
+
+.button:disabled svg{
+  animation: animate 2s infinite;
+}
+
+.button:hover{
+  filter: brightness(1.08);
+}
+
+.buttonText{
+  color: var(--white);
+}
+
+@keyframes animate{
+  from{
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+}

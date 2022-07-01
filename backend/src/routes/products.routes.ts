@@ -20,7 +20,7 @@ productsRouter.post(
 );
 
 productsRouter.get(
-  '/category/:id',
+  '/category',
   ensureAutenticated,
   listProductsController.handle,
 );

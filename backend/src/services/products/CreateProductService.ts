@@ -16,7 +16,7 @@ class CreateProductService {
     });
 
     if (productAlreadyExists) {
-      throw new AppError('Product already exists');
+      throw new AppError('Produto existente');
     }
 
     const product = await prismaClient.product.create({

@@ -16,13 +16,13 @@ class AuthUserService {
     });
 
     if (!user) {
-      throw new AppError('Email or password incorrect');
+      throw new AppError('Email ou senha inválidos');
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError('Email or password incorrect');
+      throw new AppError('Email ou senha inválidos');
     }
 
     const token = sign({}, auth.jwt.secret, {
@@ -31,12 +31,10 @@ class AuthUserService {
     });
 
     return {
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        token,
-      },
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token,
     };
   }
 }
