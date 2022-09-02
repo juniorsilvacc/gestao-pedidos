@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+
+  postgres:
+    image: 'postgres:alpine'
+
+    # Porta padrão
+    ports:
+      - '5432:5432'
+    network_mode: bridge # port available on localhost
+    container_name: database_gestao_pedidos
+
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'db_gestao_pedidos'
+
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
