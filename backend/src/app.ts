@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import 'express-async-errors';
 import { router } from './shared/infra/routes';
 import { exceptions } from './shared/errors/handle-exceptions';
 
