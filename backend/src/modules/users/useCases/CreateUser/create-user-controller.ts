@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { BcrypyProviderImplementations } from '../../../../shared/providers/bcrypt/implementations/bcrypt-provider-implementations';
 import { PostgresUsersImplementations } from '../../repositories/implementations/postgres-users-implementations';
 import { CreateUserUseCase } from './create-user-usecase';
 
@@ -7,7 +8,11 @@ class CreateUserController {
     const { name, email, cpf, password } = request.body;
 
     const usersImplementations = new PostgresUsersImplementations();
-    const createUserUseCase = new CreateUserUseCase(usersImplementations);
+    const bcrypyProviderImplementations = new BcrypyProviderImplementations();
+    const createUserUseCase = new CreateUserUseCase(
+      usersImplementations,
+      bcrypyProviderImplementations,
+    );
 
     const user = await createUserUseCase.execute({
       name,
