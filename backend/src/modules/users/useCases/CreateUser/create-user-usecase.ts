@@ -15,7 +15,7 @@ class CreateUserUseCase {
     const cpfExists = await this.usersRepository.findByCPF(cpf);
 
     if (emailExits || cpfExists) {
-      throw new AppError('User already exists');
+      throw new AppError('Esse usuário já existe');
     }
 
     const passwordHash = await this.bcryptProvider.generateHash(password);
