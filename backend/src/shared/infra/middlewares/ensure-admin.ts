@@ -13,7 +13,7 @@ export default async function ensureAdmin(
   const user = await postgresUsersImplementations.findById(id);
 
   if (!user?.isAdmin) {
-    throw new AppError("User isn't admin.");
+    throw new AppError('O usuário não é administrador');
   }
 
   return next();
