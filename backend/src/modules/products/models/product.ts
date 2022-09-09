@@ -5,11 +5,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
 import { v4 as uuidV4 } from 'uuid';
 
-@Entity('users')
-class User {
+@Entity('products')
+class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,20 +16,16 @@ class User {
   name: string;
 
   @Column()
-  email: string;
+  description: string;
 
   @Column()
-  cpf: string;
+  price: number;
 
   @Column()
-  @Exclude()
-  password: string;
+  image: string;
 
   @Column()
-  avatar: string;
-
-  @Column()
-  isAdmin: boolean;
+  category_id: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -44,5 +39,4 @@ class User {
     }
   }
 }
-
-export { User };
+export { Product };
