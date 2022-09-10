@@ -3,11 +3,13 @@ import { CreateCategoryController } from '../../../modules/categories/useCases/C
 import { ListCategoriesController } from '../../../modules/categories/useCases/ListCategories/list-categories-controller';
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
 import ensureAdmin from '../middlewares/ensure-admin';
+import { UpdateCategoryController } from '../../../modules/categories/useCases/UpdateCategory/update-category-controller';
 
 const categoriesRouter = Router();
 
 const createCategoryController = new CreateCategoryController();
 const listCategoriesController = new ListCategoriesController();
+const updateCategoryController = new UpdateCategoryController();
 
 categoriesRouter.post(
   '/create',
@@ -21,6 +23,13 @@ categoriesRouter.get(
   ensureAuthenticate,
   ensureAdmin,
   listCategoriesController.handle,
+);
+
+categoriesRouter.put(
+  '/update/:id',
+  ensureAuthenticate,
+  ensureAdmin,
+  updateCategoryController.handle,
 );
 
 export { categoriesRouter };
