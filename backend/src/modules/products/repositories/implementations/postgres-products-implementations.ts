@@ -11,6 +11,22 @@ class PostgresProductsImplementations implements IProductsRepository {
     this.repository = dataSource.getRepository(Product);
   }
 
+  async findAll(): Promise<Product[]> {
+    const products = await this.repository.find({
+      relations: ['category'],
+      select: {
+        name: true,
+        description: true,
+        price: true,
+        image: true,
+        created_at: true,
+        updated_at: true,
+      },
+    });
+
+    return products;
+  }
+
   async create({
     name,
     description,

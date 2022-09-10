@@ -2,10 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { Category } from '../../categories/models/category';
 
 @Entity('products')
 class Product {
@@ -26,6 +29,10 @@ class Product {
 
   @Column()
   category_id: string;
+
+  @ManyToOne(() => Category, category => category.product)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
 
   @CreateDateColumn()
   created_at: Date;
