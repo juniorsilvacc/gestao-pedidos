@@ -11,17 +11,19 @@ class PostgresProductsImplementations implements IProductsRepository {
     this.repository = dataSource.getRepository(Product);
   }
 
+  async removeProduct(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+
+  async findById(id: string): Promise<Product | null> {
+    const product = await this.repository.findOneBy({ id });
+
+    return product;
+  }
+
   async findAll(): Promise<Product[]> {
     const products = await this.repository.find({
       relations: ['category'],
-      select: {
-        name: true,
-        description: true,
-        price: true,
-        image: true,
-        created_at: true,
-        updated_at: true,
-      },
     });
 
     return products;

@@ -11,6 +11,16 @@ class PostgresCategoriesImplementations implements ICategoriesRespository {
     this.repository = dataSource.getRepository(Category);
   }
 
+  async findById(id: string): Promise<Category | null> {
+    const category = await this.repository.findOneBy({ id });
+
+    return category;
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+
   async findAll(): Promise<Category[]> {
     const categories = await this.repository.find();
 

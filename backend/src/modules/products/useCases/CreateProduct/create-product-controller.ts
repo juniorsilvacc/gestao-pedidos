@@ -25,7 +25,7 @@ class CreateProductController {
         category_id,
       });
 
-      return response.status(201).json({ product });
+      return response.status(201).json(product);
     }
   }
 }
