@@ -3,13 +3,11 @@ import { CreateCategoryController } from '../../../modules/categories/useCases/C
 import { ListCategoriesController } from '../../../modules/categories/useCases/ListCategories/list-categories-controller';
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
 import ensureAdmin from '../middlewares/ensure-admin';
-import { RemoveCategoryController } from '../../../modules/categories/useCases/RemoveCategory/remove-category-controller';
 
 const categoriesRouter = Router();
 
 const createCategoryController = new CreateCategoryController();
 const listCategoriesController = new ListCategoriesController();
-const removeCategoriesController = new RemoveCategoryController();
 
 categoriesRouter.post(
   '/create',
@@ -23,13 +21,6 @@ categoriesRouter.get(
   ensureAuthenticate,
   ensureAdmin,
   listCategoriesController.handle,
-);
-
-categoriesRouter.delete(
-  '/remove/:id',
-  ensureAuthenticate,
-  ensureAdmin,
-  removeCategoriesController.handle,
 );
 
 export { categoriesRouter };
