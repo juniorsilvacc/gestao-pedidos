@@ -11,6 +11,10 @@ class PostgresProductsImplementations implements IProductsRepository {
     this.repository = dataSource.getRepository(Product);
   }
 
+  async save(prodject: Product): Promise<Product> {
+    return await this.repository.save(prodject);
+  }
+
   async removeProduct(id: string): Promise<void> {
     await this.repository.delete(id);
   }

@@ -5,7 +5,7 @@ import ensureAdmin from '../middlewares/ensure-admin';
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
 import uploadConfig from '../../../config/upload';
 import { ListProductsController } from '../../../modules/products/useCases/ListProducts/list-products-controller';
-import { RemoveProductController } from '../../../modules/products/useCases/RemoveProduct/remove-product-controller';
+import { UpdateProductController } from '../../../modules/products/useCases/UpdateProduct/update-product-controller';
 
 const productsRouter = Router();
 
@@ -13,7 +13,7 @@ const upload = multer(uploadConfig.upload('./tmp'));
 
 const createProductsController = new CreateProductController();
 const listProductsController = new ListProductsController();
-const removeProductController = new RemoveProductController();
+const updateProductController = new UpdateProductController();
 
 productsRouter.post(
   '/create',
@@ -30,11 +30,11 @@ productsRouter.get(
   listProductsController.handle,
 );
 
-productsRouter.delete(
-  '/remove/:id',
+productsRouter.put(
+  '/update/:id',
   ensureAuthenticate,
   ensureAdmin,
-  removeProductController.handle,
+  updateProductController.handle,
 );
 
 export { productsRouter };

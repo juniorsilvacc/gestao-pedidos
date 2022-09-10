@@ -7,6 +7,7 @@ interface IProductsRepository {
   findAll(): Promise<Product[]>;
   removeProduct(id: string): Promise<void>;
   findById(id: string): Promise<Product | null>;
+  save(prodject: Product): Promise<Product>;
 }
 
 export { IProductsRepository };
