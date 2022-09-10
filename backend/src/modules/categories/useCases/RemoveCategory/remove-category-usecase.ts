@@ -9,13 +9,13 @@ class RemoveCategoryUseCase {
   constructor(private readonly categoriesRepository: ICategoriesRespository) {}
 
   async execute({ id }: IRequest): Promise<void> {
-    const category = await this.categoriesRepository.findById(id);
+    const categoryExists = await this.categoriesRepository.findById(id);
 
-    if (!category) {
+    if (!categoryExists) {
       throw new AppError('Essa categoria não existe', 404);
     }
 
-    await this.categoriesRepository.remove(id);
+    await this.categoriesRepository.removeCategory(id);
   }
 }
 
