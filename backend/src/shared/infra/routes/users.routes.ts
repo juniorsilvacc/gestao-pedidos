@@ -11,7 +11,9 @@ const authenticateUserController = new AuthenticateUserController();
 const detailsUserController = new DetailsUserController();
 
 usersRouter.post('/register', createUserController.handle);
+
 usersRouter.post('/login', authenticateUserController.handle);
+
 usersRouter.get('/details', ensureAuthenticate, detailsUserController.handle);
 
 export { usersRouter };
