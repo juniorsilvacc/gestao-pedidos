@@ -11,6 +11,15 @@ class PostgresItemsImplementations implements IItemsRepository {
     this.repository = dataSource.getRepository(Item);
   }
 
+  async findDetail(order_id: string): Promise<Item[]> {
+    const order = await this.repository.find({
+      where: { order_id },
+      relations: ['product', 'order'],
+    });
+
+    return order;
+  }
+
   async findById(id: string): Promise<Item | null> {
     const item = await this.repository.findOneBy({ id });
 

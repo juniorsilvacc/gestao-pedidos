@@ -2,10 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import { Item } from '../../items/models/item';
 
 @Entity('orders')
 class Order {
@@ -23,6 +25,9 @@ class Order {
 
   @Column({ default: true })
   draft: boolean;
+
+  @OneToMany(() => Item, item => item.order)
+  item: Item[];
 
   @CreateDateColumn()
   created_at: Date;

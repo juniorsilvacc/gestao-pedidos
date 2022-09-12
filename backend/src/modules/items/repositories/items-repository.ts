@@ -5,6 +5,7 @@ interface IItemsRepository {
   create(data: ICreateItemDTO): Promise<Item>;
   removeItem(id: string): Promise<void>;
   findById(id: string): Promise<Item | null>;
+  findDetail(order_id: string): Promise<Item[]>;
 }
 
 export { IItemsRepository };
