@@ -11,6 +11,16 @@ class PostgresItemsImplementations implements IItemsRepository {
     this.repository = dataSource.getRepository(Item);
   }
 
+  async findById(id: string): Promise<Item | null> {
+    const item = await this.repository.findOneBy({ id });
+
+    return item;
+  }
+
+  async removeItem(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
+
   async create({
     amount,
     order_id,

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { PostgresItemsImplementations } from '../repositories/implementations/postgres-items-implementations';
+import { PostgresItemsImplementations } from '../../repositories/implementations/postgres-items-implementations';
+
 import { CreateItemUseCase } from './create-item-usecase';
 
 class CreateItemController {

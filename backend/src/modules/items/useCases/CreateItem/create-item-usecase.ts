@@ -1,6 +1,6 @@
-import { ICreateItemDTO } from '../dtos/create-item-dto';
-import { Item } from '../models/item';
-import { IItemsRepository } from '../repositories/items-repository';
+import { ICreateItemDTO } from '../../dtos/create-item-dto';
+import { Item } from '../../models/item';
+import { IItemsRepository } from '../../repositories/items-repository';
 
 class CreateItemUseCase {
   constructor(private readonly itemsRepository: IItemsRepository) {}
