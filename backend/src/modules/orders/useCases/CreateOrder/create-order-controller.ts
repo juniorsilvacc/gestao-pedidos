@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PostgresOrdersImplementations } from '../repositories/implementations/postgres-orders-implementations';
+import { PostgresOrdersImplementations } from '../../repositories/implementations/postgres-orders-implementations';
 import { CreateOrderUseCase } from './create-order-usecase';
 
 class CreateOrderController {

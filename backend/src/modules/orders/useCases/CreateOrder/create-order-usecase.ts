@@ -1,7 +1,7 @@
-import { AppError } from '../../../shared/errors/app-error';
-import { ICreateOrderDTO } from '../dtos/create-order-dto';
-import { Order } from '../models/order';
-import { IOrdersRepository } from '../repositories/orders-repository';
+import { AppError } from '../../../../shared/errors/app-error';
+import { ICreateOrderDTO } from '../../dtos/create-order-dto';
+import { Order } from '../../models/order';
+import { IOrdersRepository } from '../../repositories/orders-repository';
 
 class CreateOrderUseCase {
   constructor(private readonly ordersRepository: IOrdersRepository) {}

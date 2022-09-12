@@ -11,6 +11,16 @@ class PostgresOrdersImplementations implements IOrdersRepository {
     this.repository = dataSource.getRepository(Order);
   }
 
+  async findById(id: string): Promise<Order | null> {
+    const order = await this.repository.findOneBy({ id });
+
+    return order;
+  }
+
+  async closeOrder(order_id: string): Promise<void> {
+    await this.repository.delete(order_id);
+  }
+
   async findByTable(table: number): Promise<Order | null> {
     const order = await this.repository.findOneBy({ table });
 
