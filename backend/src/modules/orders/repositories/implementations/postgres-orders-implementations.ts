@@ -15,10 +15,15 @@ class PostgresOrdersImplementations implements IOrdersRepository {
     return await this.repository.save(order);
   }
 
-  async listOrders(): Promise<Order[]> {
-    const orders = await this.repository.find();
+  async listOrdersDraftFalse(): Promise<Order[]> {
+    const order = await this.repository.find({
+      where: { status: false, draft: false },
+      order: {
+        created_at: 'DESC',
+      },
+    });
 
-    return orders;
+    return order;
   }
 
   async findById(id: string): Promise<Order | null> {

@@ -6,7 +6,7 @@ interface IOrdersRepository {
   findByTable(table: number): Promise<Order | null>;
   closeOrder(order_id: string): Promise<void>;
   findById(id: string): Promise<Order | null>;
-  listOrders(): Promise<Order[]>;
+  listOrdersDraftFalse(): Promise<Order[]>;
   save(order: Order): Promise<Order>;
 }
 
