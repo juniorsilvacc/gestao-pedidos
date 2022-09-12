@@ -6,6 +6,7 @@ interface IOrdersRepository {
   findByTable(table: number): Promise<Order | null>;
   closeOrder(order_id: string): Promise<void>;
   findById(id: string): Promise<Order | null>;
+  listOrders(): Promise<Order[]>;
 }
 
 export { IOrdersRepository };
