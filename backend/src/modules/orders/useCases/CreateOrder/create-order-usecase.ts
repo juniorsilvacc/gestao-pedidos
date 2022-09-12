@@ -10,7 +10,7 @@ class CreateOrderUseCase {
     const registeredTable = await this.ordersRepository.findByTable(table);
 
     if (registeredTable) {
-      throw new AppError('Essa mesa foi registrada');
+      throw new AppError('Essa mesa já está registrada');
     }
 
     const order = await this.ordersRepository.create({

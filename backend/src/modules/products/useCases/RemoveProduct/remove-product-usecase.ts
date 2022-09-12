@@ -8,7 +8,7 @@ class RemoveProductUseCase {
     const product = await this.productsRepository.findById(id);
 
     if (!product) {
-      throw new AppError('Esse produto não existe', 404);
+      throw new AppError('Produto não encontrado', 404);
     }
 
     await this.productsRepository.removeProduct(id);

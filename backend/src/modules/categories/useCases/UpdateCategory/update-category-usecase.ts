@@ -14,7 +14,7 @@ class UpdateCategoryUseCase {
     const category = await this.categoriesRepository.findById(id);
 
     if (!category) {
-      throw new AppError('Essa categoria não existe', 404);
+      throw new AppError('Categoria não encontrada', 404);
     }
 
     const categoryWithUpdateName = await this.categoriesRepository.findByName(
@@ -22,7 +22,7 @@ class UpdateCategoryUseCase {
     );
 
     if (categoryWithUpdateName && categoryWithUpdateName.id !== id) {
-      throw new AppError('Essa categoria já existe');
+      throw new AppError('Categoria existente');
     }
 
     category.name = name;

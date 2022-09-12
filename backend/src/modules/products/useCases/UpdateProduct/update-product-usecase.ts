@@ -16,7 +16,7 @@ class UpdateProductUseCase {
     const product = await this.productsRepository.findById(id);
 
     if (!product) {
-      throw new AppError('Esse produto não existe', 404);
+      throw new AppError('Produto não encontrado', 404);
     }
 
     const productWithUpdateName = await this.productsRepository.findByName(
@@ -24,7 +24,7 @@ class UpdateProductUseCase {
     );
 
     if (productWithUpdateName && productWithUpdateName.id !== id) {
-      throw new AppError('Esse produto já existe');
+      throw new AppError('Produto existente');
     }
 
     product.name = name;

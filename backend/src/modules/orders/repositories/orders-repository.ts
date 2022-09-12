@@ -7,6 +7,7 @@ interface IOrdersRepository {
   closeOrder(order_id: string): Promise<void>;
   findById(id: string): Promise<Order | null>;
   listOrders(): Promise<Order[]>;
+  save(order: Order): Promise<Order>;
 }
 
 export { IOrdersRepository };

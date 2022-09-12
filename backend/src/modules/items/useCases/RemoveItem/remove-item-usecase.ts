@@ -12,7 +12,7 @@ class RemoveItemUseCase {
     const itemExists = await this.itemsRepository.findById(id);
 
     if (!itemExists) {
-      throw new AppError('Esse item não existe');
+      throw new AppError('Item não encontrado', 404);
     }
 
     await this.itemsRepository.removeItem(id);
