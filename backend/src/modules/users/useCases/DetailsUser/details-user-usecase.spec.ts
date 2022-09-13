@@ -1,3 +1,4 @@
+import { AppError } from '../../../../shared/errors/app-error';
 import { InMemoryUsersImplementations } from '../../repositories/in-memory/in-memory-users-implementations';
 import { DetailsUserUseCase } from './details-user-usecase';
 
@@ -21,5 +22,11 @@ describe('Details User', () => {
     const detail = await detailsUserUseCase.execute({ id: user.id });
 
     expect(detail).toBe(user);
+  });
+
+  it('should not be able to detail a user does not exists', async () => {
+    await expect(
+      detailsUserUseCase.execute({ id: 'non-existent' }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
