@@ -1,3 +1,4 @@
+import { AppError } from '../../../../shared/errors/app-error';
 import { InMemoryBcryptProviderImplementations } from '../../../../shared/providers/bcrypt/in-memory/in-memory-bcrypt-provider';
 import { InMemoryUsersImplementations } from '../../repositories/in-memory/in-memory-users-implementations';
 import { AuthenticateUserUseCase } from './authenticate-user-usecase';
@@ -32,5 +33,14 @@ describe('Authenticate User', () => {
     expect(response).toHaveProperty('token');
     expect(response.name).toBe(user.name);
     expect(response.email).toBe(user.email);
+  });
+
+  it('should not be able to authenticate with non existent user', async () => {
+    expect(
+      authenticateUserUseCase.execute({
+        email: 'junior@hotmail.com',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
