@@ -11,7 +11,7 @@ class RemoveProductController {
       productsImplementations,
     );
 
-    await removeProductUseCase.execute(id);
+    await removeProductUseCase.execute({ id });
 
     return response.status(204).json();
   }
