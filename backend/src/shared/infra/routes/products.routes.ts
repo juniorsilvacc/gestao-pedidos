@@ -10,7 +10,7 @@ import { RemoveProductController } from '../../../modules/products/useCases/Remo
 
 const productsRouter = Router();
 
-const upload = multer(uploadConfig.upload('./tmp'));
+const upload = multer(uploadConfig);
 
 const createProductsController = new CreateProductController();
 const listProductsController = new ListProductsController();
