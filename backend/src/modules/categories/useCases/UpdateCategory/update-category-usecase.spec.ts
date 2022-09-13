@@ -23,7 +23,7 @@ describe('Update Category', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should not be able to switch to another user name if it already exists', async () => {
+  it('should not be able to update name to an already using name', async () => {
     const category = await inMemoryCategoriesImplementations.create({
       name: 'Name Category',
       description: 'Category Description',
