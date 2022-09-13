@@ -1,3 +1,4 @@
+import { AppError } from '../../../../shared/errors/app-error';
 import { InMemoryCategoriesImplementations } from '../../repositories/in-memory/in-memory-categories-implementations';
 import { CreateCategoryUseCase } from './create-category-usecase';
 
@@ -19,5 +20,19 @@ describe('Create Category', () => {
     });
 
     expect(category).toHaveProperty('id');
+  });
+
+  it('shold not be able to create a new category with the same name', async () => {
+    await inMemoryCategoriesImplementations.create({
+      name: 'Category Name',
+      description: 'Category Description',
+    });
+
+    expect(
+      createCategoryUseCase.execute({
+        name: 'Category Name',
+        description: 'Category Description 2',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
