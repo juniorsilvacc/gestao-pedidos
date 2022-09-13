@@ -21,7 +21,7 @@ class UpdateCategoryUseCase {
       name,
     );
 
-    if (categoryWithUpdateName && categoryWithUpdateName.id !== id) {
+    if (categoryWithUpdateName) {
       throw new AppError('Categoria existente');
     }
 
