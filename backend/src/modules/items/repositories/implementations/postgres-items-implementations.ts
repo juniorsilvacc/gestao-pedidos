@@ -15,6 +15,9 @@ class PostgresItemsImplementations implements IItemsRepository {
     const order = await this.repository.find({
       where: { order_id },
       relations: ['product', 'order'],
+      order: {
+        created_at: 'DESC',
+      },
     });
 
     return order;
