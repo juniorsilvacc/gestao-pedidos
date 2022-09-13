@@ -22,4 +22,19 @@ describe('Update Category', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to switch to another user name if it already exists', async () => {
+    await inMemoryCategoriesImplementations.create({
+      name: 'Name Category',
+      description: 'Category Description',
+    });
+
+    expect(
+      updateCategoryUseCase.execute({
+        id: 'b6a3582a-e54d-444b-bf70-3affd4fb28fe',
+        name: 'Name Category',
+        description: 'Category Description 2',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
