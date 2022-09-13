@@ -36,10 +36,26 @@ describe('Authenticate User', () => {
   });
 
   it('should not be able to authenticate with non existent user', async () => {
-    expect(
+    await expect(
       authenticateUserUseCase.execute({
         email: 'junior@hotmail.com',
         password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to authenticate with wrong password', async () => {
+    await inMemoryUsersImplementations.create({
+      name: 'Júnior Silva',
+      email: 'junior@hotmail.com',
+      cpf: '11122233345',
+      password: '123456',
+    });
+
+    await expect(
+      authenticateUserUseCase.execute({
+        email: 'junior@hotmail.com',
+        password: 'incorrect',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
