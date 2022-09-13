@@ -24,17 +24,33 @@ describe('Update Category', () => {
   });
 
   it('should not be able to switch to another user name if it already exists', async () => {
-    await inMemoryCategoriesImplementations.create({
+    const category = await inMemoryCategoriesImplementations.create({
       name: 'Name Category',
       description: 'Category Description',
     });
 
-    expect(
+    await expect(
       updateCategoryUseCase.execute({
-        id: 'b6a3582a-e54d-444b-bf70-3affd4fb28fe',
+        id: category.id,
         name: 'Name Category',
-        description: 'Category Description 2',
+        description: 'Category Description',
       }),
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should be able to update', async () => {
+    const category = await inMemoryCategoriesImplementations.create({
+      name: 'Name Category',
+      description: 'Category Description',
+    });
+
+    await updateCategoryUseCase.execute({
+      id: category.id,
+      name: 'Name Category Update',
+      description: 'Category Description Update',
+    });
+
+    expect(category.name).toBe('Name Category Update');
+    expect(category.description).toBe('Category Description Update');
   });
 });
