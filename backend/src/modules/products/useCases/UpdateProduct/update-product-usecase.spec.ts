@@ -46,4 +46,30 @@ describe('Update Product', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should be able to update', async () => {
+    const product = await inMemoryProductsImplementations.create({
+      name: 'Name Test',
+      price: 50,
+      description: 'Description Test',
+      image: 'imagetest.png',
+      category_id: 'a9814566-901a-4a33-8615-5b2bcf8c80af',
+    });
+
+    const updateProduct = await updateProductUseCase.execute({
+      id: product.id,
+      name: 'Name Test Update',
+      price: 60,
+      description: 'Description Test Update',
+      image: 'imagetest.png',
+      category_id: 'd19a44ef-45a8-406f-af71-bb5febb5fbfd',
+    });
+
+    expect(updateProduct.name).toBe('Name Test Update');
+    expect(updateProduct.price).toBe(60);
+    expect(updateProduct.description).toBe('Description Test Update');
+    expect(updateProduct.category_id).toBe(
+      'd19a44ef-45a8-406f-af71-bb5febb5fbfd',
+    );
+  });
 });
