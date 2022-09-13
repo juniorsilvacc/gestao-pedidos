@@ -23,7 +23,7 @@ class UpdateProductUseCase {
       name,
     );
 
-    if (productWithUpdateName && productWithUpdateName.id !== id) {
+    if (productWithUpdateName) {
       throw new AppError('Produto existente');
     }
 
