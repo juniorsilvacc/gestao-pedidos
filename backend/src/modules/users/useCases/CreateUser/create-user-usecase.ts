@@ -38,11 +38,11 @@ class CreateUserUseCase {
         name: 'Equipe Administração e Gestão de Pedidos',
         email: 'fastservice@app.com',
       },
-      subject: 'Cadastro Concluído',
+      subject: 'Cadastro Concluído - FAST SERVICE',
       body: [
         `<div style="text-align: center">`,
         `<h1>FeedBack</h1>`,
-        `<p>Olá ${name}, Sua conta foi criada com sucesso. Obrigado!</p>`,
+        `<p>Bem vindo a equipe <b>${name}</b>, Sua conta para o aplicativo gestão de pedidos foi criada com sucesso. Obrigado!</p>`,
         `</div>`,
       ].join(''),
     });

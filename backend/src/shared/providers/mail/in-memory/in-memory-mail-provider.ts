@@ -1,6 +1,6 @@
 import { IMailProvider, IMessage } from '../mail-provider';
 
-class InMemoryMailProvider implements IMailProvider {
+class InMemoryMailProviderImplementations implements IMailProvider {
   private messages: IMessage[] = [];
 
   async sendMail(message: IMessage): Promise<void> {
@@ -8,4 +8,4 @@ class InMemoryMailProvider implements IMailProvider {
   }
 }
 
-export { InMemoryMailProvider };
+export { InMemoryMailProviderImplementations };
