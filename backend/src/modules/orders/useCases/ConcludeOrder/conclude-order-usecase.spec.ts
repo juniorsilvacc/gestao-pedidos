@@ -20,4 +20,19 @@ describe('Conclude Order', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should conclude a order', async () => {
+    const order = await inMemoryOrdersImplementations.create({
+      name: 'Name Test',
+      table: 10,
+      status: false,
+      draft: false,
+    });
+
+    const concludeOrder = await concludeOrdersUseCase.execute({
+      order_id: order.id,
+    });
+
+    expect(concludeOrder.status).toBe(true);
+  });
 });
