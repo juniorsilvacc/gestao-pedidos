@@ -1,3 +1,4 @@
+import { AppError } from '../../../../shared/errors/app-error';
 import { InMemoryStorageProviderImplementations } from '../../../../shared/providers/storage/in-memory/in-memory-storage-provider';
 import { InMemoryUsersImplementations } from '../../repositories/in-memory/in-memory-users-implementations';
 import { UploadAvatarUserUseCase } from './upload-avatar-user-usecase';
@@ -30,5 +31,14 @@ describe('Upload Avatar', () => {
     });
 
     expect(user.avatar).toBe('avatar.png');
+  });
+
+  it('should not be able to upload avatar from non existing user', async () => {
+    await expect(
+      uploadAvatarUserUseCase.execute({
+        user_id: 'non-existing',
+        image: 'avatar.png',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
