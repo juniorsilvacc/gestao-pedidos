@@ -3,8 +3,8 @@ import path from 'path';
 import uploadConfig from '../../../../config/upload';
 import { IStorageProvider } from '../storage-provider';
 
-class DisksStorageProviderImplementations implements IStorageProvider {
-  async saveFile(file: string): Promise<string> {
+class DiskStorageProviderImplementations implements IStorageProvider {
+  public async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
       path.resolve(uploadConfig.tmpFolder, file),
       path.resolve(uploadConfig.uploadsFolder, file),
@@ -13,7 +13,7 @@ class DisksStorageProviderImplementations implements IStorageProvider {
     return file;
   }
 
-  async deleteFile(file: string): Promise<void> {
+  public async deleteFile(file: string): Promise<void> {
     const filePath = path.resolve(uploadConfig.uploadsFolder, file);
 
     try {
@@ -28,4 +28,4 @@ class DisksStorageProviderImplementations implements IStorageProvider {
   }
 }
 
-export { DisksStorageProviderImplementations };
+export { DiskStorageProviderImplementations };

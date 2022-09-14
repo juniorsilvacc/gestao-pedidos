@@ -11,6 +11,10 @@ class PostgresUsersImplementations implements IUsersRepository {
     this.repository = dataSource.getRepository(User);
   }
 
+  async save(user: User): Promise<User> {
+    return await this.repository.save(user);
+  }
+
   async findById(id: string): Promise<User | null> {
     const user = await this.repository.findOneBy({ id });
 
