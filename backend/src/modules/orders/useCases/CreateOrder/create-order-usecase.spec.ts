@@ -1,3 +1,4 @@
+import { AppError } from '../../../../shared/errors/app-error';
 import { InMemoryOrdersImplementations } from '../../repositories/in-memory/in-memory-orders-implementations';
 import { CreateOrderUseCase } from './create-order-usecase';
 
@@ -19,5 +20,23 @@ describe('Create Order', () => {
     });
 
     expect(order).toHaveProperty('id');
+  });
+
+  it('shold not be able to create a new order with the same table', async () => {
+    await createOrderUseCase.execute({
+      name: 'Name Test',
+      table: 10,
+      status: false,
+      draft: true,
+    });
+
+    await expect(
+      createOrderUseCase.execute({
+        name: 'Name Test',
+        table: 10,
+        status: false,
+        draft: true,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
