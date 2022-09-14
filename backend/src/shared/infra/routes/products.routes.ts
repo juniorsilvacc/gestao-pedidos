@@ -32,7 +32,7 @@ productsRouter.get(
   listProductsController.handle,
 );
 
-productsRouter.put(
+productsRouter.patch(
   '/update/:id',
   ensureAuthenticate,
   ensureAdmin,

@@ -25,7 +25,7 @@ categoriesRouter.get(
   listCategoriesController.handle,
 );
 
-categoriesRouter.put(
+categoriesRouter.patch(
   '/update/:id',
   ensureAuthenticate,
   ensureAdmin,
