@@ -12,7 +12,7 @@ describe('Close Order', () => {
   });
 
   it('should not be able to close a order does not exists', async () => {
-    expect(
+    await expect(
       closeOrderUseCase.execute({
         order_id: 'non-existent',
       }),

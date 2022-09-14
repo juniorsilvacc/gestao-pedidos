@@ -30,9 +30,9 @@ class InMemoryItemsImplementations implements IItemsRepository {
   }
 
   async findDetail(order_id: string): Promise<Item[]> {
-    this.items.find(item => item.id === order_id);
+    const item = this.items.find(item => item.id === order_id) as any;
 
-    return [];
+    return item;
   }
 }
 

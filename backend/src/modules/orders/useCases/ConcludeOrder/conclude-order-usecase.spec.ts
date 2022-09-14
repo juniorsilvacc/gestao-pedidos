@@ -14,7 +14,7 @@ describe('Conclude Order', () => {
   });
 
   it('should not be able to conclude a order does not exists', async () => {
-    expect(
+    await expect(
       concludeOrdersUseCase.execute({
         order_id: 'non-existent',
       }),
