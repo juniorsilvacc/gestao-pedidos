@@ -20,4 +20,18 @@ describe('List Order Item Details', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should list order items', async () => {
+    const item = await inMemoryItemsImplementations.create({
+      amount: 2,
+      order_id: '7f7eab8f-e1ed-47d8-8cba-dc95bd9bf035',
+      product_id: 'a9814566-901a-4a33-8615-5b2bcf8c80af',
+    });
+
+    const listOrdersDetails = await listOrderItemDetailsUseCase.execute({
+      order_id: item.id,
+    });
+
+    expect(listOrdersDetails).toEqual(item);
+  });
 });
