@@ -18,4 +18,19 @@ describe('Send Order', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should send a order', async () => {
+    const order = await inMemoryOrdersImplementations.create({
+      name: 'Name Test',
+      table: 10,
+      status: false,
+      draft: true,
+    });
+
+    const sendOrder = await sendOrdersUseCase.execute({
+      order_id: order.id,
+    });
+
+    expect(sendOrder.draft).toBe(false);
+  });
 });
