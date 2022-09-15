@@ -17,3 +17,8 @@ services:
 
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
