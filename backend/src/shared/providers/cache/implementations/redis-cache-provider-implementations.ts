@@ -25,8 +25,8 @@ class RedisCacheProviderImplementations implements ICacheProvider {
     return parsedData;
   }
 
-  async invalidate(key: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async invalidate(key: string): Promise<void> {
+    await this.client.del(key);
   }
 }
 

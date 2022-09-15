@@ -1,10 +1,14 @@
 import { AppError } from '../../../../shared/errors/app-error';
+import { ICacheProvider } from '../../../../shared/providers/cache/cache-provider';
 import { ICreateProductDTO } from '../../dtos/create-product-dto';
 import { Product } from '../../models/product';
 import { IProductsRepository } from '../../repositories/products-repository';
 
 class CreateProductUseCase {
-  constructor(private productsRepository: IProductsRepository) {}
+  constructor(
+    private readonly productsRepository: IProductsRepository,
+    private readonly cacheProvider: ICacheProvider,
+  ) {}
 
   async execute({
     name,
@@ -26,6 +30,8 @@ class CreateProductUseCase {
       image,
       category_id,
     });
+
+    await this.cacheProvider.invalidate('api-PRODUCT_LIST');
 
     return product;
   }

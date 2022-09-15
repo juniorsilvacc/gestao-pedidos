@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { AppError } from '../../../../shared/errors/app-error';
+import { RedisCacheProviderImplementations } from '../../../../shared/providers/cache/implementations/redis-cache-provider-implementations';
 import { PostgresProductsImplementations } from '../../repositories/implementations/postgres-products-implementations';
 import { CreateProductUseCase } from './create-product-usecase';
 
@@ -8,8 +9,11 @@ class CreateProductController {
     const { name, description, price, category_id } = request.body;
 
     const productsImplementations = new PostgresProductsImplementations();
+    const redisCacheProviderImplementations =
+      new RedisCacheProviderImplementations();
     const createProductUseCase = new CreateProductUseCase(
       productsImplementations,
+      redisCacheProviderImplementations,
     );
 
     if (!request.file) {
