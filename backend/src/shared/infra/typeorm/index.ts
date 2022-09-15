@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Category } from '../../../modules/categories/models/category';
 import { Item } from '../../../modules/items/models/item';
+import { Notification } from '../../../modules/notifications/models/notification';
 import { Order } from '../../../modules/orders/models/order';
 import { Product } from '../../../modules/products/models/product';
 import { User } from '../../../modules/users/models/user';
@@ -13,7 +14,7 @@ import { createItems1662908902017 } from './migrations/1662908902017-create-item
 // yarn typeorm migration:create src/shared/infra/typeorm/migrations/
 // yarn typeorm -- -d ./src/shared/infra/typeorm/index.ts migration:run
 
-export const dataSource = new DataSource({
+export const PostgresDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5432,
@@ -28,4 +29,13 @@ export const dataSource = new DataSource({
     createOrders1662908889440,
     createItems1662908902017,
   ],
+});
+
+export const MongoDataSource = new DataSource({
+  type: 'mongodb',
+  host: 'localhost',
+  port: 27017,
+  database: 'db_mongo_gestao_pedidos',
+  useUnifiedTopology: true,
+  entities: [Notification],
 });

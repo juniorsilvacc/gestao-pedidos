@@ -1,10 +1,12 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 import app from './app';
-import { dataSource } from './shared/infra/typeorm';
+import { PostgresDataSource, MongoDataSource } from './shared/infra/typeorm';
 
-dataSource.initialize().then(() => {
+Promise.all([
+  (PostgresDataSource.initialize(), MongoDataSource.initialize()),
+]).then(() => {
   app.listen(process.env.PORT || 3333, () => {
-    return console.log('Server started on port 3333! 🏆');
+    return console.log(`Server started on port ${process.env.PORT}! 🏆`);
   });
 });

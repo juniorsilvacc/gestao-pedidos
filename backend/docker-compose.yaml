@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
+  # PostgreSQL
   postgres:
     image: 'postgres:alpine'
 
@@ -18,6 +19,7 @@ services:
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d
 
+  # Redis
   redis:
     image: 'redis:alpine'
 
@@ -25,6 +27,17 @@ services:
     ports:
       - '6379:6379'
     container_name: 'db_redis_gestao_pedidos'
+
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+
+  # MongoDB
+  mongo:
+    image: 'mongo:latest'
+
+    # Porta padrão
+    ports:
+      - '27017:27017'
+    container_name: 'db_mongo_gestao_pedidos'
+
 
