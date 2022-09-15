@@ -6,7 +6,7 @@ interface IRequest {
 }
 
 class RemoveProductUseCase {
-  constructor(private productsRepository: IProductsRepository) {}
+  constructor(private readonly productsRepository: IProductsRepository) {}
 
   async execute({ id }: IRequest): Promise<void> {
     const product = await this.productsRepository.findById(id);

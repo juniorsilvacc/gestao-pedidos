@@ -4,7 +4,7 @@ import { Product } from '../../models/product';
 import { IProductsRepository } from '../../repositories/products-repository';
 
 class UpdateProductUseCase {
-  constructor(private productsRepository: IProductsRepository) {}
+  constructor(private readonly productsRepository: IProductsRepository) {}
 
   async execute({
     id,
