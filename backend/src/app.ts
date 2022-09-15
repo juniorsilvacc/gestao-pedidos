@@ -1,17 +1,19 @@
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
 import 'express-async-errors';
 import { router } from './shared/infra/routes';
 import { exceptions } from './shared/errors/handle-exceptions';
+import rateLimiter from './shared/infra/middlewares/rate-limiter';
 import uploadConfig from './config/upload';
 
 const app = express();
 
+app.use(rateLimiter);
+
 app.use(express.json());
 app.use(cors());
 
-app.use('/files', express.static(path.resolve(uploadConfig.tmpFolder)));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 
 app.use(router);
 
