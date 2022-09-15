@@ -1,14 +1,21 @@
 import { AppError } from '../../../../shared/errors/app-error';
+import { InMemoryNotificationsImplementations } from '../../../notifications/repositories/in-memory/in-memory-notifications-implementations';
 import { InMemoryOrdersImplementations } from '../../repositories/in-memory/in-memory-orders-implementations';
 import { SendOrdersUseCase } from './send-order-usecase';
 
 let inMemoryOrdersImplementations: InMemoryOrdersImplementations;
+let inMemoryNotificationsImplementations: InMemoryNotificationsImplementations;
 let sendOrdersUseCase: SendOrdersUseCase;
 
 describe('Send Order', () => {
   beforeEach(() => {
     inMemoryOrdersImplementations = new InMemoryOrdersImplementations();
-    sendOrdersUseCase = new SendOrdersUseCase(inMemoryOrdersImplementations);
+    inMemoryNotificationsImplementations =
+      new InMemoryNotificationsImplementations();
+    sendOrdersUseCase = new SendOrdersUseCase(
+      inMemoryOrdersImplementations,
+      inMemoryNotificationsImplementations,
+    );
   });
 
   it('should not be able to send a order does not exists', async () => {
