@@ -14,7 +14,7 @@ describe('Close Order', () => {
   it('should not be able to close a order does not exists', async () => {
     await expect(
       closeOrderUseCase.execute({
-        order_id: 'non-existent',
+        id: 'non-existent',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -28,7 +28,7 @@ describe('Close Order', () => {
     });
 
     const closeOrder = await closeOrderUseCase.execute({
-      order_id: order.id,
+      id: order.id,
     });
 
     expect(closeOrder).toBeUndefined();

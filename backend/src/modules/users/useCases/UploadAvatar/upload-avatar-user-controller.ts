@@ -3,6 +3,7 @@ import { AppError } from '../../../../shared/errors/app-error';
 import { DiskStorageProviderImplementations } from '../../../../shared/providers/storage/implementations/disk-storage-provider-implementations';
 import { PostgresUsersImplementations } from '../../repositories/implementations/postgres-users-implementations';
 import { UploadAvatarUserUseCase } from './upload-avatar-user-usecase';
+import { instanceToInstance } from 'class-transformer';
 
 class UploadAvatarUserController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -26,7 +27,7 @@ class UploadAvatarUserController {
         image,
       });
 
-      return response.status(200).json(user);
+      return response.status(200).json(instanceToInstance(user));
     }
   }
 }

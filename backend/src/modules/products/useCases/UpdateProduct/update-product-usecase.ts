@@ -1,10 +1,14 @@
 import { AppError } from '../../../../shared/errors/app-error';
+import { ICacheProvider } from '../../../../shared/providers/cache/cache-provider';
 import { IUpdateProductDTO } from '../../dtos/update-product-dto';
 import { Product } from '../../models/product';
 import { IProductsRepository } from '../../repositories/products-repository';
 
 class UpdateProductUseCase {
-  constructor(private readonly productsRepository: IProductsRepository) {}
+  constructor(
+    private readonly productsRepository: IProductsRepository,
+    private readonly cacheProvider: ICacheProvider,
+  ) {}
 
   async execute({
     id,
@@ -26,6 +30,8 @@ class UpdateProductUseCase {
     if (productWithUpdateName) {
       throw new AppError('Produto existente');
     }
+
+    await this.cacheProvider.invalidate('api-PRODUCT_LIST');
 
     product.name = name;
     product.description = description;

@@ -9,7 +9,7 @@ class CloseOrderController {
     const ordersImplementations = new PostgresOrdersImplementations();
     const closeOrderUseCase = new CloseOrderUseCase(ordersImplementations);
 
-    await closeOrderUseCase.execute({ order_id: id });
+    await closeOrderUseCase.execute({ id });
 
     return response.status(204).json();
   }

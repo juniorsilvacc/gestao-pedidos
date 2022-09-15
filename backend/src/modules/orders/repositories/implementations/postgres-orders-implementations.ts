@@ -32,8 +32,8 @@ class PostgresOrdersImplementations implements IOrdersRepository {
     return order;
   }
 
-  async closeOrder(order_id: string): Promise<void> {
-    await this.repository.delete(order_id);
+  async closeOrder(id: string): Promise<void> {
+    await this.repository.delete(id);
   }
 
   async findByTable(table: number): Promise<Order | null> {

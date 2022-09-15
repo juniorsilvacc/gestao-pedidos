@@ -4,7 +4,7 @@ import { Order } from '../models/order';
 interface IOrdersRepository {
   create(data: ICreateOrderDTO): Promise<Order>;
   findByTable(table: number): Promise<Order | null>;
-  closeOrder(order_id: string): Promise<void>;
+  closeOrder(id: string): Promise<void>;
   findById(id: string): Promise<Order | null>;
   listOrdersDraftFalse(): Promise<Order[]>;
   save(order: Order): Promise<Order>;
