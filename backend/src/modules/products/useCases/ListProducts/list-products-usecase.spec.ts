@@ -1,14 +1,19 @@
+import { InMemoryCacheProviderImplementations } from '../../../../shared/providers/cache/in-memory/in-memory-cache-provider';
 import { InMemoryProductsImplementations } from '../../repositories/in-memory/in-memory-products-implementations';
 import { ListProductsUseCase } from './list-products-usecase';
 
 let inMemoryProductsImplementations: InMemoryProductsImplementations;
+let inMemoryCacheProviderImplementations: InMemoryCacheProviderImplementations;
 let listProductsUseCase: ListProductsUseCase;
 
 describe('List Products', () => {
   beforeEach(() => {
     inMemoryProductsImplementations = new InMemoryProductsImplementations();
+    inMemoryCacheProviderImplementations =
+      new InMemoryCacheProviderImplementations();
     listProductsUseCase = new ListProductsUseCase(
       inMemoryProductsImplementations,
+      inMemoryCacheProviderImplementations,
     );
   });
 

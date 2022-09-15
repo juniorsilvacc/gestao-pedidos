@@ -4,7 +4,7 @@ interface ICacheData {
   [key: string]: string;
 }
 
-class InMemoryCacheProvider implements ICacheProvider {
+class InMemoryCacheProviderImplementations implements ICacheProvider {
   private cache: ICacheData = {};
 
   async save(key: string, value: any): Promise<void> {
@@ -28,4 +28,4 @@ class InMemoryCacheProvider implements ICacheProvider {
   }
 }
 
-export { InMemoryCacheProvider };
+export { InMemoryCacheProviderImplementations };

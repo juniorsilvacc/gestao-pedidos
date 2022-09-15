@@ -1,15 +1,20 @@
 import { AppError } from '../../../../shared/errors/app-error';
+import { InMemoryCacheProviderImplementations } from '../../../../shared/providers/cache/in-memory/in-memory-cache-provider';
 import { InMemoryProductsImplementations } from '../../repositories/in-memory/in-memory-products-implementations';
 import { CreateProductUseCase } from './create-product-usecase';
 
 let inMemoryProductsImplementations: InMemoryProductsImplementations;
+let inMemoryCacheProviderImplementations: InMemoryCacheProviderImplementations;
 let createProductUseCase: CreateProductUseCase;
 
 describe('Create Product', () => {
   beforeEach(() => {
     inMemoryProductsImplementations = new InMemoryProductsImplementations();
+    inMemoryCacheProviderImplementations =
+      new InMemoryCacheProviderImplementations();
     createProductUseCase = new CreateProductUseCase(
       inMemoryProductsImplementations,
+      inMemoryCacheProviderImplementations,
     );
   });
 
