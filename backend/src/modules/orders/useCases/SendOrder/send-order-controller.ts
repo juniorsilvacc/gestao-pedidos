@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { MongoNotificationImplementations } from '../../../notifications/repositories/implementations/mongo-notifications-implementations';
 import { PostgresOrdersImplementations } from '../../repositories/implementations/postgres-orders-implementations';
 import { SendOrdersUseCase } from './send-order-usecase';
 
@@ -7,7 +8,12 @@ class SendOrderController {
     const { order_id } = request.body;
 
     const ordersImplementations = new PostgresOrdersImplementations();
-    const sendOrderUseCase = new SendOrdersUseCase(ordersImplementations);
+    const mongoNotificationImplementations =
+      new MongoNotificationImplementations();
+    const sendOrderUseCase = new SendOrdersUseCase(
+      ordersImplementations,
+      mongoNotificationImplementations,
+    );
 
     const order = await sendOrderUseCase.execute({
       order_id,
