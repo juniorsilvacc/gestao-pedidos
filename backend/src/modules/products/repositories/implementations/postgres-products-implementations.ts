@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../../shared/infra/typeorm';
+import { PostgresDataSource } from '../../../../shared/infra/typeorm';
 import { ICreateProductDTO } from '../../dtos/create-product-dto';
 import { Product } from '../../models/product';
 import { IProductsRepository } from '../products-repository';
@@ -8,7 +8,7 @@ class PostgresProductsImplementations implements IProductsRepository {
   private repository: Repository<Product>;
 
   constructor() {
-    this.repository = dataSource.getRepository(Product);
+    this.repository = PostgresDataSource.getRepository(Product);
   }
 
   async save(product: Product): Promise<Product> {

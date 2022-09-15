@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../../shared/infra/typeorm';
+import { PostgresDataSource } from '../../../../shared/infra/typeorm';
 import { ICreateOrderDTO } from '../../dtos/create-order-dto';
 import { Order } from '../../models/order';
 import { IOrdersRepository } from '../orders-repository';
@@ -8,7 +8,7 @@ class PostgresOrdersImplementations implements IOrdersRepository {
   private repository: Repository<Order>;
 
   constructor() {
-    this.repository = dataSource.getRepository(Order);
+    this.repository = PostgresDataSource.getRepository(Order);
   }
 
   async save(order: Order): Promise<Order> {

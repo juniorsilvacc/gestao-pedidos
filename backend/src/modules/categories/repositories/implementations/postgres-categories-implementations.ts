@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../../shared/infra/typeorm';
+import { PostgresDataSource } from '../../../../shared/infra/typeorm';
 import { ICreateCategoryDTO } from '../../dtos/create-category-dto';
 import { Category } from '../../models/category';
 import { ICategoriesRespository } from '../categories-repository';
@@ -8,7 +8,7 @@ class PostgresCategoriesImplementations implements ICategoriesRespository {
   private repository: Repository<Category>;
 
   constructor() {
-    this.repository = dataSource.getRepository(Category);
+    this.repository = PostgresDataSource.getRepository(Category);
   }
 
   async findById(id: string): Promise<Category | null> {

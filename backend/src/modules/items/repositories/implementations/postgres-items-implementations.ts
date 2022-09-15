@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../../shared/infra/typeorm';
+import { PostgresDataSource } from '../../../../shared/infra/typeorm';
 import { ICreateItemDTO } from '../../dtos/create-item-dto';
 import { Item } from '../../models/item';
 import { IItemsRepository } from '../items-repository';
@@ -8,7 +8,7 @@ class PostgresItemsImplementations implements IItemsRepository {
   private repository: Repository<Item>;
 
   constructor() {
-    this.repository = dataSource.getRepository(Item);
+    this.repository = PostgresDataSource.getRepository(Item);
   }
 
   async findDetail(order_id: string): Promise<Item[]> {

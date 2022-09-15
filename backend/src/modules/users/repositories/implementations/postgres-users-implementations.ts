@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { dataSource } from '../../../../shared/infra/typeorm';
+import { PostgresDataSource } from '../../../../shared/infra/typeorm';
 import { ICreateUserDTO } from '../../dtos/create-user-dto';
 import { User } from '../../models/user';
 import { IUsersRepository } from '../users-repository';
@@ -8,7 +8,7 @@ class PostgresUsersImplementations implements IUsersRepository {
   private repository: Repository<User>;
 
   constructor() {
-    this.repository = dataSource.getRepository(User);
+    this.repository = PostgresDataSource.getRepository(User);
   }
 
   async save(user: User): Promise<User> {
