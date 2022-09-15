@@ -4,6 +4,7 @@ import { ListCategoriesController } from '../../../modules/categories/useCases/L
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
 import ensureAdmin from '../middlewares/ensure-admin';
 import { UpdateCategoryController } from '../../../modules/categories/useCases/UpdateCategory/update-category-controller';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 const categoriesRouter = Router();
 
@@ -15,6 +16,12 @@ categoriesRouter.post(
   '/create',
   ensureAuthenticate,
   ensureAdmin,
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      description: Joi.string(),
+    },
+  }),
   createCategoryController.handle,
 );
 
@@ -29,6 +36,15 @@ categoriesRouter.patch(
   '/update/:id',
   ensureAuthenticate,
   ensureAdmin,
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      description: Joi.string(),
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().required().uuid(),
+    },
+  }),
   updateCategoryController.handle,
 );
 

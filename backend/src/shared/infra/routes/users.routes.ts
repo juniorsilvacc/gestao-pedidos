@@ -7,6 +7,7 @@ import { UploadAvatarUserController } from '../../../modules/users/useCases/Uplo
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
 import uploadConfig from '../../../config/upload';
 import ensureAdmin from '../middlewares/ensure-admin';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 const usersRouter = Router();
 
@@ -17,12 +18,29 @@ const authenticateUserController = new AuthenticateUserController();
 const detailsUserController = new DetailsUserController();
 const uploadAvatarUserController = new UploadAvatarUserController();
 
-usersRouter.post('/login', authenticateUserController.handle);
+usersRouter.post(
+  '/login',
+  celebrate({
+    [Segments.BODY]: {
+      email: Joi.string().email().required(),
+      password: Joi.string().required().min(6).max(32),
+    },
+  }),
+  authenticateUserController.handle,
+);
 
 usersRouter.post(
   '/register',
   ensureAuthenticate,
   ensureAdmin,
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      cpf: Joi.string().required().min(12),
+      password: Joi.string().required().min(6).max(32),
+    },
+  }),
   createUserController.handle,
 );
 
