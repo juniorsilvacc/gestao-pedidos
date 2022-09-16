@@ -4,40 +4,29 @@ services:
   # PostgreSQL
   postgres:
     image: 'postgres:alpine'
-
-    # Porta padrão
+    container_name: database-postgres-gestao-pedidos
+    restart: always
     ports:
       - '5432:5432'
-    network_mode: bridge # port available on localhost
-    container_name: database_gestao_pedidos
-
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'postgres'
       POSTGRES_DB: 'db_gestao_pedidos'
-
     volumes:
-      - ./initdb:/docker-entrypoint-initdb.d
+      - ./pgdata:/data/postgres
 
   # Redis
   redis:
     image: 'redis:alpine'
-
-    # Porta padrão
+    container_name: database_redis_gestao_pedidos
     ports:
       - '6379:6379'
-    container_name: 'db_redis_gestao_pedidos'
-
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
 
   # MongoDB
   mongo:
-    image: 'mongo:latest'
-
-    # Porta padrão
+    image: 'mongo'
+    container_name: database_mongo_gestao_pedidos
     ports:
       - '27017:27017'
-    container_name: 'db_mongo_gestao_pedidos'
-
-

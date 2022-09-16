@@ -1,7 +1,8 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 import app from './app';
-import { PostgresDataSource, MongoDataSource } from './shared/infra/typeorm';
+import { PostgresDataSource } from './shared/infra/typeorm';
+import { MongoDataSource } from './shared/infra/typeorm/index-mongo';
 
 Promise.all([
   (PostgresDataSource.initialize(), MongoDataSource.initialize()),

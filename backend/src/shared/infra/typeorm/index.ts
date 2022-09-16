@@ -1,7 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Category } from '../../../modules/categories/models/category';
 import { Item } from '../../../modules/items/models/item';
-import { Notification } from '../../../modules/notifications/models/notification';
 import { Order } from '../../../modules/orders/models/order';
 import { Product } from '../../../modules/products/models/product';
 import { User } from '../../../modules/users/models/user';
@@ -29,13 +28,4 @@ export const PostgresDataSource = new DataSource({
     createOrders1662908889440,
     createItems1662908902017,
   ],
-});
-
-export const MongoDataSource = new DataSource({
-  type: 'mongodb',
-  host: 'localhost',
-  port: 27017,
-  database: 'db_mongo_gestao_pedidos',
-  useUnifiedTopology: true,
-  entities: [Notification],
 });

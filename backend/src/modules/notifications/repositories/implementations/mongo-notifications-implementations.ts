@@ -1,5 +1,5 @@
 import { MongoRepository } from 'typeorm';
-import { MongoDataSource } from '../../../../shared/infra/typeorm';
+import { MongoDataSource } from '../../../../shared/infra/typeorm/index-mongo';
 import { ICreateNotificationDTO } from '../../dtos/create-notification-dto';
 import { Notification } from '../../models/notification';
 import { INotificationsRepository } from '../notifications-repository';
