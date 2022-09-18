@@ -34,6 +34,7 @@
     "tsconfig-paths": "^4.1.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.1218.0",
     "bcrypt": "^5.0.1",
     "celebrate": "^15.0.1",
     "class-transformer": "^0.5.1",
