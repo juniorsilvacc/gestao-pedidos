@@ -15,7 +15,7 @@ import {
 
 const usersRouter = Router();
 
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 
 const createUserController = new CreateUserController();
 const authenticateUserController = new AuthenticateUserController();
