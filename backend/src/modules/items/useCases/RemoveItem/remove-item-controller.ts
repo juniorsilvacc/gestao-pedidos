@@ -1,13 +1,12 @@
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import { PostgresItemsImplementations } from '../../repositories/implementations/postgres-items-implementations';
 import { RemoveItemUseCase } from './remove-item-usecase';
 
 class RemoveItemController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const itemsImplementations = new PostgresItemsImplementations();
-    const removeItemUseCase = new RemoveItemUseCase(itemsImplementations);
+    const removeItemUseCase = container.resolve(RemoveItemUseCase);
 
     await removeItemUseCase.execute({ id });
 

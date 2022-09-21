@@ -1,5 +1,6 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
-import { IStorageProvider } from '../../../../shared/providers/storage/storage-provider';
+import { IStorageProvider } from '../../../../shared/providers/storage/models/storage-provider';
 import { User } from '../../models/user';
 import { IUsersRepository } from '../../repositories/users-repository';
 
@@ -8,9 +9,12 @@ interface IRequest {
   image: string;
 }
 
+@injectable()
 class UploadAvatarUserUseCase {
   constructor(
+    @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository,
+    @inject('StorageProvider')
     private readonly storageProvider: IStorageProvider,
   ) {}
 

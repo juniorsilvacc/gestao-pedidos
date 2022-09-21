@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
 import { INotificationsRepository } from '../../../notifications/repositories/notifications-repository';
 import { Order } from '../../models/order';
@@ -7,9 +8,12 @@ interface IRequest {
   order_id: string;
 }
 
+@injectable()
 class SendOrdersUseCase {
   constructor(
+    @inject('OrdersRepository')
     private readonly ordersRepository: IOrdersRepository,
+    @inject('NotificationsRepository')
     private readonly notificationsRepository: INotificationsRepository,
   ) {}
 

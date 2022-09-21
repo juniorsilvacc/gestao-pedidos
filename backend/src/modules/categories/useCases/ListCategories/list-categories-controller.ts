@@ -1,14 +1,10 @@
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import { PostgresCategoriesImplementations } from '../../repositories/implementations/postgres-categories-implementations';
 import { ListCategoriesUseCase } from './list-categories-usecase';
 
 class ListCategoriesController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const postgresCategoriesImplementations =
-      new PostgresCategoriesImplementations();
-    const listCategoriesUseCase = new ListCategoriesUseCase(
-      postgresCategoriesImplementations,
-    );
+    const listCategoriesUseCase = container.resolve(ListCategoriesUseCase);
 
     const categories = await listCategoriesUseCase.execute();
 

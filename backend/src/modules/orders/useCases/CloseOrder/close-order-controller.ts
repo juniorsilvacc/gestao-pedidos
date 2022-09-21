@@ -1,13 +1,12 @@
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import { PostgresOrdersImplementations } from '../../repositories/implementations/postgres-orders-implementations';
 import { CloseOrderUseCase } from './close-order-usecase';
 
 class CloseOrderController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const ordersImplementations = new PostgresOrdersImplementations();
-    const closeOrderUseCase = new CloseOrderUseCase(ordersImplementations);
+    const closeOrderUseCase = container.resolve(CloseOrderUseCase);
 
     await closeOrderUseCase.execute({ id });
 

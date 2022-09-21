@@ -1,14 +1,18 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
-import { ICacheProvider } from '../../../../shared/providers/cache/cache-provider';
+import { ICacheProvider } from '../../../../shared/providers/cache/models/cache-provider';
 import { IProductsRepository } from '../../repositories/products-repository';
 
 interface IRequest {
   id: string;
 }
 
+@injectable()
 class RemoveProductUseCase {
   constructor(
+    @inject('ProductsRepository')
     private readonly productsRepository: IProductsRepository,
+    @inject('CacheProvider')
     private readonly cacheProvider: ICacheProvider,
   ) {}
 

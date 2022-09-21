@@ -1,5 +1,5 @@
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import { PostgresCategoriesImplementations } from '../../repositories/implementations/postgres-categories-implementations';
 import { UpdateCategoryUseCase } from './update-category-usecase';
 
 class UpdateCategoryController {
@@ -7,11 +7,7 @@ class UpdateCategoryController {
     const { id } = request.params;
     const { name, description } = request.body;
 
-    const postgresCategoriesImplementations =
-      new PostgresCategoriesImplementations();
-    const updateCategoryUseCase = new UpdateCategoryUseCase(
-      postgresCategoriesImplementations,
-    );
+    const updateCategoryUseCase = container.resolve(UpdateCategoryUseCase);
 
     const category = await updateCategoryUseCase.execute({
       id,

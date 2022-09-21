@@ -1,5 +1,6 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
-import { IBcryptProvider } from '../../../../shared/providers/bcrypt/bcrypt-provider';
+import { IBcryptProvider } from '../../../../shared/providers/bcrypt/models/bcrypt-provider';
 import { IUsersRepository } from '../../repositories/users-repository';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../../../config/auth';
@@ -9,9 +10,12 @@ interface IRequest {
   password: string;
 }
 
+@injectable()
 class AuthenticateUserUseCase {
   constructor(
+    @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository,
+    @inject('BcryptProvider')
     private readonly bcryptProvider: IBcryptProvider,
   ) {}
 

@@ -1,25 +1,21 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
-import { IBcryptProvider } from '../../../../shared/providers/bcrypt/bcrypt-provider';
-import { IMailProvider } from '../../../../shared/providers/mail/mail-provider';
+import { IBcryptProvider } from '../../../../shared/providers/bcrypt/models/bcrypt-provider';
+import { IMailProvider } from '../../../../shared/providers/mail/models/mail-provider';
 import { ICreateUserDTO } from '../../dtos/create-user-dto';
 import { User } from '../../models/user';
 import { IUsersRepository } from '../../repositories/users-repository';
-import mailConfig from '../../../../config/mail';
-import { MailProviderImplementations } from '../../../../shared/providers/mail/implementations/mail-provider-implementations';
-import { SESMailProviderImplementations } from '../../../../shared/providers/mail/implementations/ses-mail-provider-implementations';
 
+@injectable()
 class CreateUserUseCase {
   constructor(
+    @inject('UsersRepository')
     private readonly usersRepository: IUsersRepository,
+    @inject('BcryptProvider')
     private readonly bcryptProvider: IBcryptProvider,
+    @inject('MailProvider')
     private readonly mailProvider: IMailProvider,
-  ) {
-    if (mailConfig.driver === 'ethereal') {
-      this.mailProvider = new MailProviderImplementations();
-    } else {
-      this.mailProvider = new SESMailProviderImplementations();
-    }
-  }
+  ) {}
 
   async execute({ name, email, cpf, password }: ICreateUserDTO): Promise<User> {
     const emailExits = await this.usersRepository.findByEmail(email);

@@ -1,10 +1,14 @@
-import { ICacheProvider } from '../../../../shared/providers/cache/cache-provider';
+import { inject, injectable } from 'tsyringe';
+import { ICacheProvider } from '../../../../shared/providers/cache/models/cache-provider';
 import { Product } from '../../models/product';
 import { IProductsRepository } from '../../repositories/products-repository';
 
+@injectable()
 class ListProductsUseCase {
   constructor(
+    @inject('ProductsRepository')
     private readonly productsRepository: IProductsRepository,
+    @inject('CacheProvider')
     private readonly cacheProvider: ICacheProvider,
   ) {}
 

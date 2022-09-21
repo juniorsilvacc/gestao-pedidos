@@ -1,5 +1,5 @@
 import { compare, hash } from 'bcrypt';
-import { IBcryptProvider } from '../bcrypt-provider';
+import { IBcryptProvider } from '../models/bcrypt-provider';
 
 class BcrypyProviderImplementations implements IBcryptProvider {
   async generateHash(payload: string): Promise<string> {

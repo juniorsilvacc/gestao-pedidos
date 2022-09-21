@@ -1,3 +1,4 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
 import { IItemsRepository } from '../../repositories/items-repository';
 
@@ -5,8 +6,12 @@ interface IRequest {
   id: string;
 }
 
+@injectable()
 class RemoveItemUseCase {
-  constructor(private readonly itemsRepository: IItemsRepository) {}
+  constructor(
+    @inject('ItemsRepository')
+    private readonly itemsRepository: IItemsRepository,
+  ) {}
 
   async execute({ id }: IRequest): Promise<void> {
     const itemExists = await this.itemsRepository.findById(id);

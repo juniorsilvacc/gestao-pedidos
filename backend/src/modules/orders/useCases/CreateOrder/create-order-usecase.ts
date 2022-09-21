@@ -1,10 +1,15 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
 import { ICreateOrderDTO } from '../../dtos/create-order-dto';
 import { Order } from '../../models/order';
 import { IOrdersRepository } from '../../repositories/orders-repository';
 
+@injectable()
 class CreateOrderUseCase {
-  constructor(private readonly ordersRepository: IOrdersRepository) {}
+  constructor(
+    @inject('OrdersRepository')
+    private readonly ordersRepository: IOrdersRepository,
+  ) {}
 
   async execute({ name, table }: ICreateOrderDTO): Promise<Order> {
     const registeredTable = await this.ordersRepository.findByTable(table);

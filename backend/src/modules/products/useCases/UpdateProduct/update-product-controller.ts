@@ -1,6 +1,5 @@
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
-import { RedisCacheProviderImplementations } from '../../../../shared/providers/cache/implementations/redis-cache-provider-implementations';
-import { PostgresProductsImplementations } from '../../repositories/implementations/postgres-products-implementations';
 import { UpdateProductUseCase } from './update-product-usecase';
 
 class UpdateProductController {
@@ -8,13 +7,7 @@ class UpdateProductController {
     const { id } = request.params;
     const { name, description, price, category_id } = request.body;
 
-    const productsImplementations = new PostgresProductsImplementations();
-    const redisCacheProviderImplementations =
-      new RedisCacheProviderImplementations();
-    const updateProductUseCase = new UpdateProductUseCase(
-      productsImplementations,
-      redisCacheProviderImplementations,
-    );
+    const updateProductUseCase = container.resolve(UpdateProductUseCase);
 
     const product = await updateProductUseCase.execute({
       id,

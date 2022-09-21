@@ -1,4 +1,4 @@
-import { IMailProvider, IMessage } from '../mail-provider';
+import { IMailProvider, IMessage } from '../models/mail-provider';
 import aws from 'aws-sdk';
 import nodemailer, { Transporter } from 'nodemailer';
 

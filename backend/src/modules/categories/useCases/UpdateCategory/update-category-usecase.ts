@@ -1,10 +1,15 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
 import { IUpdateCategoryDTO } from '../../dtos/update-category-dto';
 import { Category } from '../../models/category';
 import { ICategoriesRespository } from '../../repositories/categories-repository';
 
+@injectable()
 class UpdateCategoryUseCase {
-  constructor(private readonly categoriesRepository: ICategoriesRespository) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private readonly categoriesRepository: ICategoriesRespository,
+  ) {}
 
   async execute({
     id,

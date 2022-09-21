@@ -1,4 +1,4 @@
-import { IMailProvider, IMessage } from '../mail-provider';
+import { IMailProvider, IMessage } from '../models/mail-provider';
 
 class InMemoryMailProviderImplementations implements IMailProvider {
   private messages: IMessage[] = [];

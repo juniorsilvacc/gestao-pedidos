@@ -1,12 +1,16 @@
+import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
-import { ICacheProvider } from '../../../../shared/providers/cache/cache-provider';
+import { ICacheProvider } from '../../../../shared/providers/cache/models/cache-provider';
 import { ICreateProductDTO } from '../../dtos/create-product-dto';
 import { Product } from '../../models/product';
 import { IProductsRepository } from '../../repositories/products-repository';
 
+@injectable()
 class CreateProductUseCase {
   constructor(
+    @inject('ProductsRepository')
     private readonly productsRepository: IProductsRepository,
+    @inject('CacheProvider')
     private readonly cacheProvider: ICacheProvider,
   ) {}
 

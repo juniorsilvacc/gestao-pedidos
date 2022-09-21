@@ -1,4 +1,4 @@
-import { IBcryptProvider } from '../bcrypt-provider';
+import { IBcryptProvider } from '../models/bcrypt-provider';
 
 class InMemoryBcryptProviderImplementations implements IBcryptProvider {
   async generateHash(payload: string): Promise<string> {

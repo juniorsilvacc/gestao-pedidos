@@ -1,9 +1,14 @@
+import { inject, injectable } from 'tsyringe';
 import { ICreateItemDTO } from '../../dtos/create-item-dto';
 import { Item } from '../../models/item';
 import { IItemsRepository } from '../../repositories/items-repository';
 
+@injectable()
 class CreateItemUseCase {
-  constructor(private readonly itemsRepository: IItemsRepository) {}
+  constructor(
+    @inject('ItemsRepository')
+    private readonly itemsRepository: IItemsRepository,
+  ) {}
 
   async execute({
     amount,

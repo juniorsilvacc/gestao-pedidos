@@ -6,6 +6,7 @@ import { exceptions } from './shared/errors/handle-exceptions';
 import { errors } from 'celebrate';
 import rateLimiter from './shared/infra/middlewares/rate-limiter';
 import uploadConfig from './config/upload';
+import './shared/container';
 
 const app = express();
 
