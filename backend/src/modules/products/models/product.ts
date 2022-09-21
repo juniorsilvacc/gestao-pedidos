@@ -11,6 +11,8 @@ import {
 import { v4 as uuidV4 } from 'uuid';
 import { Category } from '../../categories/models/category';
 import { Item } from '../../items/models/item';
+import { Expose } from 'class-transformer';
+import uploadConfig from '../../../config/upload';
 
 @Entity('products')
 class Product {
@@ -44,6 +46,22 @@ class Product {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'image_url' })
+  getImageUrl(): string | null {
+    if (!this.image) {
+      return null;
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.image}`;
+      case 's3':
+        return `https://${uploadConfig.config.aws.bucket}.s3.amazonaws.com/${this.image}`;
+      default:
+        return null;
+    }
+  }
 
   constructor() {
     if (!this.id) {

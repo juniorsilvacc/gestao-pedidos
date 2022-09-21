@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { AppError } from '../../../../shared/errors/app-error';
 import { CreateProductUseCase } from './create-product-usecase';
+import { instanceToInstance } from 'class-transformer';
 
 class CreateProductController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -22,7 +23,7 @@ class CreateProductController {
         category_id,
       });
 
-      return response.status(201).json(product);
+      return response.status(201).json(instanceToInstance(product));
     }
   }
 }

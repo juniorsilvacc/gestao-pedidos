@@ -15,7 +15,7 @@ import {
 
 const productsRouter = Router();
 
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 
 const createProductsController = new CreateProductController();
 const listProductsController = new ListProductsController();

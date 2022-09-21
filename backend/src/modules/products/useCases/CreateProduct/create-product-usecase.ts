@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/app-error';
 import { ICacheProvider } from '../../../../shared/providers/cache/models/cache-provider';
+import { IStorageProvider } from '../../../../shared/providers/storage/models/storage-provider';
 import { ICreateProductDTO } from '../../dtos/create-product-dto';
 import { Product } from '../../models/product';
 import { IProductsRepository } from '../../repositories/products-repository';
@@ -12,6 +13,8 @@ class CreateProductUseCase {
     private readonly productsRepository: IProductsRepository,
     @inject('CacheProvider')
     private readonly cacheProvider: ICacheProvider,
+    @inject('StorageProvider')
+    private readonly storageProvider: IStorageProvider,
   ) {}
 
   async execute({
@@ -34,6 +37,8 @@ class CreateProductUseCase {
       image,
       category_id,
     });
+
+    await this.storageProvider.saveFile(image);
 
     await this.cacheProvider.invalidate('api-PRODUCT_LIST');
 
