@@ -7,7 +7,12 @@ import { ListOrdersDraftFalseController } from '../../../modules/orders/useCases
 import { SendOrderController } from '../../../modules/orders/useCases/SendOrder/send-order-controller';
 import ensureAdmin from '../middlewares/ensure-admin';
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
-import { celebrate, Segments, Joi } from 'celebrate';
+import {
+  closeOrderValidation,
+  createOrderValidation,
+  endOrderValidation,
+  sendOrderValidation,
+} from '../validations/orders-validations';
 
 const ordersRouter = Router();
 
@@ -21,23 +26,14 @@ const listOrderItemDetailsController = new ListOrderItemDetailsController();
 ordersRouter.post(
   '/create',
   ensureAuthenticate,
-  celebrate({
-    [Segments.BODY]: {
-      name: Joi.string(),
-      table: Joi.number().required(),
-    },
-  }),
+  createOrderValidation,
   createOrderController.handle,
 );
 
 ordersRouter.delete(
   '/close/:id',
   ensureAuthenticate,
-  celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().required().uuid(),
-    },
-  }),
+  closeOrderValidation,
   closeOrderController.handle,
 );
 
@@ -51,11 +47,7 @@ ordersRouter.get(
 ordersRouter.put(
   '/send',
   ensureAuthenticate,
-  celebrate({
-    [Segments.BODY]: {
-      order_id: Joi.string().required().uuid(),
-    },
-  }),
+  sendOrderValidation,
   sendOrderController.handle,
 );
 
@@ -63,11 +55,7 @@ ordersRouter.put(
   '/end',
   ensureAuthenticate,
   ensureAdmin,
-  celebrate({
-    [Segments.BODY]: {
-      order_id: Joi.string().required().uuid(),
-    },
-  }),
+  endOrderValidation,
   concludeOrderController.handle,
 );
 

@@ -7,7 +7,11 @@ import uploadConfig from '../../../config/upload';
 import { ListProductsController } from '../../../modules/products/useCases/ListProducts/list-products-controller';
 import { UpdateProductController } from '../../../modules/products/useCases/UpdateProduct/update-product-controller';
 import { RemoveProductController } from '../../../modules/products/useCases/RemoveProduct/remove-product-controller';
-import { celebrate, Segments, Joi } from 'celebrate';
+import {
+  createProductValidation,
+  removeProductValidation,
+  updateProductValidation,
+} from '../validations/products-validations';
 
 const productsRouter = Router();
 
@@ -23,16 +27,7 @@ productsRouter.post(
   ensureAuthenticate,
   ensureAdmin,
   upload.single('image'),
-  celebrate({
-    [Segments.BODY]: {
-      name: Joi.string().required(),
-      price: Joi.number().required(),
-      description: Joi.string().required(),
-      image: Joi.string(),
-      category_id: Joi.string().required().uuid(),
-    },
-  }),
-
+  createProductValidation,
   createProductsController.handle,
 );
 
@@ -47,17 +42,7 @@ productsRouter.patch(
   '/update/:id',
   ensureAuthenticate,
   ensureAdmin,
-  celebrate({
-    [Segments.BODY]: {
-      name: Joi.string(),
-      price: Joi.number(),
-      description: Joi.string(),
-      category_id: Joi.string().uuid(),
-    },
-    [Segments.PARAMS]: {
-      id: Joi.string().required().uuid(),
-    },
-  }),
+  updateProductValidation,
   updateProductController.handle,
 );
 
@@ -65,11 +50,7 @@ productsRouter.delete(
   '/remove/:id',
   ensureAuthenticate,
   ensureAdmin,
-  celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().required().uuid(),
-    },
-  }),
+  removeProductValidation,
   removeProductController.handle,
 );
 
