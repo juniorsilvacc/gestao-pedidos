@@ -2,6 +2,7 @@ import { Router } from 'express';
 import multer from 'multer';
 import { AuthenticateUserController } from '../../../modules/users/useCases/AuthenticateUser/authenticate-user-controller';
 import { CreateUserController } from '../../../modules/users/useCases/CreateUser/create-user-controller';
+import { CreateUserAdminController } from '../../../modules/users/useCases/CreateAdmin/create-user-admin-controller';
 import { DetailsUserController } from '../../../modules/users/useCases/DetailsUser/details-user-controller';
 import { UploadAvatarUserController } from '../../../modules/users/useCases/UploadAvatar/upload-avatar-user-controller';
 import ensureAuthenticate from '../middlewares/ensure-authenticate';
@@ -18,6 +19,7 @@ const usersRouter = Router();
 const upload = multer(uploadConfig.multer);
 
 const createUserController = new CreateUserController();
+const createUserAdminController = new CreateUserAdminController();
 const authenticateUserController = new AuthenticateUserController();
 const detailsUserController = new DetailsUserController();
 const uploadAvatarUserController = new UploadAvatarUserController();
@@ -34,6 +36,12 @@ usersRouter.post(
   ensureAdmin,
   registerValidation,
   createUserController.handle,
+);
+
+usersRouter.post(
+  '/register/admin',
+  registerValidation,
+  createUserAdminController.handle,
 );
 
 usersRouter.get('/details', ensureAuthenticate, detailsUserController.handle);

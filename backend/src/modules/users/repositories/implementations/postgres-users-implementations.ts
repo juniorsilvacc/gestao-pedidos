@@ -40,6 +40,25 @@ class PostgresUsersImplementations implements IUsersRepository {
 
     return user;
   }
+
+  async createAdmin({
+    name,
+    email,
+    cpf,
+    password,
+  }: ICreateUserDTO): Promise<User> {
+    const user = this.repository.create({
+      name,
+      email,
+      cpf,
+      password,
+      isAdmin: true,
+    });
+
+    await this.repository.save(user);
+
+    return user;
+  }
 }
 
 export { PostgresUsersImplementations };
