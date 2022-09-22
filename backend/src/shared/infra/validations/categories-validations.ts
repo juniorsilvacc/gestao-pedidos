@@ -16,3 +16,9 @@ export const updateCategoryValidation = celebrate({
     id: Joi.string().required().uuid(),
   },
 });
+
+export const removeCategoryValidation = celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().required().uuid(),
+  },
+});

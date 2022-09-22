@@ -7,6 +7,7 @@ interface ICategoriesRespository {
   findAll(): Promise<Category[]>;
   findById(id: string): Promise<Category | null>;
   save(category: Category): Promise<Category>;
+  removeCategory(id: string): Promise<void>;
 }
 
 export { ICategoriesRespository };

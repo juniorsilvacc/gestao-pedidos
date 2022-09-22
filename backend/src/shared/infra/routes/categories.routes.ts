@@ -7,13 +7,16 @@ import { UpdateCategoryController } from '../../../modules/categories/useCases/U
 import {
   createCategoryValidation,
   updateCategoryValidation,
+  removeCategoryValidation,
 } from '../validations/categories-validations';
+import { RemoveCategoryController } from '../../../modules/categories/useCases/RemoveCategory/remove-category-controller';
 
 const categoriesRouter = Router();
 
 const createCategoryController = new CreateCategoryController();
 const listCategoriesController = new ListCategoriesController();
 const updateCategoryController = new UpdateCategoryController();
+const removeCategoryController = new RemoveCategoryController();
 
 categoriesRouter.post(
   '/create',
@@ -36,6 +39,14 @@ categoriesRouter.patch(
   ensureAdmin,
   updateCategoryValidation,
   updateCategoryController.handle,
+);
+
+categoriesRouter.delete(
+  '/remove/:id',
+  ensureAuthenticate,
+  ensureAdmin,
+  removeCategoryValidation,
+  removeCategoryController.handle,
 );
 
 export { categoriesRouter };
