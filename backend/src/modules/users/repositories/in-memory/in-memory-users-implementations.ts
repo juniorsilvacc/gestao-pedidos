@@ -5,6 +5,21 @@ import { IUsersRepository } from '../users-repository';
 class InMemoryUsersImplementations implements IUsersRepository {
   private users: User[] = [];
 
+  async createAdmin({
+    name,
+    email,
+    cpf,
+    password,
+  }: ICreateUserDTO): Promise<User> {
+    const user = new User();
+
+    Object.assign(user, { name, email, cpf, password, isAdmin: true });
+
+    this.users.push(user);
+
+    return user;
+  }
+
   async save(user: User): Promise<User> {
     const findIndex = this.users.findIndex(
       findCategory => findCategory.id === user.id,

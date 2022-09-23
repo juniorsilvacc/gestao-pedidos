@@ -221,11 +221,14 @@
         }
       }
     },
-    "/api/categories/remove": {
+    "/api/categories/remove/{id}": {
       "delete": {
         "tags": ["Category"],
         "summary": "Delete a category",
         "description": "Delete a category",
+        "security": [
+          { "bearerAuth": []}
+        ],
         "parameters": [
           {
             "name": "id",
@@ -236,17 +239,17 @@
               "type": "string"
             }
           }
-        ]
-      },
-      "responses": {
-        "204": {
-          "description": "No Content"
-        },
-        "404": {
-          "description": "Categoria não encontrada"
-        },
-        "500": {
-          "description": "Internal server error"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
         }
       }
     }

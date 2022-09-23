@@ -6,6 +6,10 @@ import { v4 as uuidV4 } from 'uuid';
 class InMemoryCategoriesImplementations implements ICategoriesRespository {
   private categories: Category[] = [];
 
+  async removeCategory(id: string): Promise<void> {
+    this.categories.find(category => category.id === id);
+  }
+
   async create({ name, description }: ICreateCategoryDTO): Promise<Category> {
     const category = new Category();
 
