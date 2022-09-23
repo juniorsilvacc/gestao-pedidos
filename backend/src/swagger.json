@@ -130,6 +130,125 @@
           }
         }
       }
+    },
+    "/api/categories/list":{
+      "get": {
+        "tags": ["Category"],
+        "summary": "List all categories",
+        "description": "Returns all categories",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/categories/update/{id}": {
+      "put": {
+        "tags": ["Category"],
+        "summary": "Update a category",
+        "description": "Update data a category",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the category",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "example": {
+                  "name": "Category name sample update",
+                  "description": "Category category sample update"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Categoria existente"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/categories/remove": {
+      "delete": {
+        "tags": ["Category"],
+        "summary": "Delete a category",
+        "description": "Delete a category",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the category",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "responses": {
+        "204": {
+          "description": "No Content"
+        },
+        "404": {
+          "description": "Categoria não encontrada"
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
     }
   },
   "components": {
