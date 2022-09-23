@@ -18,4 +18,17 @@ describe('Remove Category', () => {
       removeCategoryUseCase.execute({ id: 'non-existent' }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should delete a category', async () => {
+    const category = await inMemoryCategoriesImplementations.create({
+      name: 'Category Name',
+      description: 'Category Description',
+    });
+
+    const removeCategory = await removeCategoryUseCase.execute({
+      id: category.id,
+    });
+
+    expect(removeCategory).toBeUndefined();
+  });
 });
