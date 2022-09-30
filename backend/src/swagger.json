@@ -12,7 +12,7 @@
     "/api/users/register/admin": {
       "post": {
         "tags": ["Users"],
-        "summary": "Create a user admin",
+        "summary": "Create admin",
         "description": "Create a user admin",
         "requestBody": {
           "content": {
@@ -37,6 +37,53 @@
                   "name": "admin",
                   "email": "admin@admin.com",
                   "cpf": "123123123123",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Esse usuário já existe"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/users/register":{
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create user",
+        "description": "Create a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "cpf": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "usuario exemple",
+                  "email": "usuario@exemple.com",
+                  "cpf": "321321321321",
                   "password": "123456"
                 }
               }
@@ -92,11 +139,89 @@
         }
       }
     },
+    "/api/users/avatar": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Upload a new avatar",
+        "description": "Upload a new avatar",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Somente usuários autenticados podem alterar o avatar"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/users/details": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Details user",
+        "description": "Details user",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties":{
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "cpf": {
+                  "type": "string"
+                },
+                "avatar": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/api/categories/create": {
       "post": {
-        "tags": ["Category"],
-        "summary": "Create a category",
-        "description": "Create a category",
+        "tags": ["Categories"],
+        "summary": "Create a new category",
+        "description": "Create a new category",
         "security": [
           { "bearerAuth": []}
         ],
@@ -133,7 +258,7 @@
     },
     "/api/categories/list":{
       "get": {
-        "tags": ["Category"],
+        "tags": ["Categories"],
         "summary": "List all categories",
         "description": "Returns all categories",
         "security": [
@@ -169,7 +294,7 @@
     },
     "/api/categories/update/{id}": {
       "put": {
-        "tags": ["Category"],
+        "tags": ["Categories"],
         "summary": "Update a category",
         "description": "Update data a category",
         "security": [
@@ -223,7 +348,7 @@
     },
     "/api/categories/remove/{id}": {
       "delete": {
-        "tags": ["Category"],
+        "tags": ["Categories"],
         "summary": "Delete a category",
         "description": "Delete a category",
         "security": [
@@ -246,6 +371,60 @@
           },
           "404": {
             "description": "Categoria não encontrada"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/products/create": {
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create a new products",
+        "description": "Create a new products",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Product Name Example",
+                  "price": 20,
+                  "description": "Product Description Example",
+                  "category_id": "e755aec0-e4fa-433d-9b34-74c8074dbdc9"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Esse produto já existe"
           },
           "500": {
             "description": "Internal server error"
