@@ -293,7 +293,7 @@
       }
     },
     "/api/categories/update/{id}": {
-      "put": {
+      "patch": {
         "tags": ["Categories"],
         "summary": "Update a category",
         "description": "Update data a category",
@@ -312,15 +312,17 @@
           }
         ],
         "requestBody": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
                 },
                 "example": {
                   "name": "Category name sample update",
@@ -425,6 +427,148 @@
           },
           "400": {
             "description": "Esse produto já existe"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/products/list": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "List all categories",
+        "description": "Returns all categories",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "image": {
+                        "type": "string",
+                        "format": "binary"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "integer"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "category_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/products/update/{id}": {
+      "patch": {
+        "tags": ["Products"],
+        "summary": "Update a product",
+        "description": "Update data a product",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the product",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "category_id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Product Name Upload Example",
+                  "price": 40,
+                  "description": "Product Description Upload Example",
+                  "category_id": "e755aec0-e4fa-433d-9b34-74c8074dbdc9"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Produto existente"
+          },
+          "404": {
+            "description": "Produto não encontrado"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/products/remove/{id}": {
+      "delete": {
+        "tags": ["Products"],
+        "summary": "Delete a product",
+        "description": "Delete a product",
+        "security": [
+          { "bearerAuth": []}
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the product",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "'Produto não encontrado"
           },
           "500": {
             "description": "Internal server error"
