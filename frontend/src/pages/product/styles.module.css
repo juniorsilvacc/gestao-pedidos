@@ -1,0 +1,70 @@
+.container {
+  max-width: 620px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.title {
+  margin: 3rem 0 .5rem 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.product {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.product form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.file {
+  width: 100%;
+  height: 250px;
+  border: 1px solid #dbdbdb;
+  background-color: #eee;
+  border-radius: 0.4rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 500ms;
+}
+
+.file input {
+  display: none;
+}
+
+.file span {
+  z-index: 99;
+  position: absolute;
+  transition: transform 500ms;
+}
+
+.file span:hover {
+  transform: scale(1.1);
+}
+
+.file:hover {
+  background: #dbdbdb;
+}
+
+.preview {
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.4rem;
+}

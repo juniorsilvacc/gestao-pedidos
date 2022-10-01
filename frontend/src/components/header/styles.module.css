@@ -1,0 +1,159 @@
+/* .header{
+  height: 6rem;
+  border-bottom: 1px solid var(--gray);
+}
+
+.content{
+  max-width: 1140px;
+  height: 6rem;
+  display: flex;
+  margin: 0 auto;
+  padding: 0 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content img{
+  cursor: pointer;
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  width: 500px;
+  justify-content: space-between;
+}
+
+.nav{
+  display: flex;
+  align-items: center;
+}
+
+.nav a{
+  color: var(--red);
+  font-weight: 600;
+  margin-right: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.nav a:hover{
+  filter: brightness(1.08);
+}
+
+.nav button{
+  border: none;
+  background: transparent;
+  transition: transform 300ms;
+}
+
+.nav button:hover{
+  transform: scale(1.2);
+  filter: brightness(1.08);
+}
+
+@media screen and (max-width: 600px) {
+  .menu{
+    width: 380px;
+  }
+
+  .nav{
+    margin-left: 1.5rem;
+  }
+
+  .menu a{
+    margin-left: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .menu {
+    width: 250px;
+  }
+
+  .img{
+    display: none;
+  }
+
+  .menu a{
+    margin-left: 0;
+  }
+} */
+
+.header{
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  background-image: linear-gradient(#B80606, #D13330);
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.header div {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+}
+
+.header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header div img {
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  object-fit: cover;
+}
+
+.header a {
+  display: block;
+  color: #FFF;
+  padding: 16px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: ease .400ms;
+}
+
+.header a svg{
+  margin-right: .5rem;
+}
+
+.header a:hover{
+  background-color: #121212;
+  color: #FFF;
+}
+
+.header .button {
+  cursor: pointer;
+}
+
+.content {
+  margin-left: 300px;
+  padding: 1px 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .header{
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .header a {
+    float: left;
+  }
+
+  .header div{
+    display: none
+  }
+}
