@@ -33,6 +33,7 @@ type AuthProviderProps = {
 type RegisterProps = {
   name: string;
   email: string;
+  cpf: string;
   password: string;
 }
 
@@ -90,15 +91,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  async function register({ name, email, password }: RegisterProps) {
+  async function register({ name, email, cpf, password }: RegisterProps) {
     try {
       await api.post("/api/users/register", {
         name,
         email,
+        cpf,
         password
       })
 
-      toast.success("Usuário criado com success");
+      toast.success("Usuário criado");
 
       Router.push("/")
     } catch (error) {

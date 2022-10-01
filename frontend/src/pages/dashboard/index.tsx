@@ -15,9 +15,6 @@ import { SSRAuth } from '../../utils/SSRAuth';
 // Api
 import { ApiClient } from '../../services/api';
 
-// Modal
-import ModalOrder from '../../components/modal';
-
 type ListOrdersProps = {
   id: string;
   name: string | null;
@@ -30,72 +27,16 @@ interface OrdersProps {
   orders: ListOrdersProps[];
 }
 
-// export type OrderItemProps = {
-//   id: string;
-//   amount: number
-//   order_id: string;
-//   product_id: string;
-//   product: {
-//     id: string;
-//     name: string;
-//     price: string;
-//     description: string;
-//     banner: string;
-//   }
-//   order: {
-//     id: string;
-//     table: string | number;
-//     status: boolean;
-//     name: string | null;
-//   }
-// }
-
 export default function Dashboard({ orders }: OrdersProps) {
   const [ordersList, setOrdersList] = useState(orders || []);
-  // const [ordersList, setOrdersList] = useState(orders || []);
 
-  // const [modaItem, setModalItem] = useState<OrderItemProps[]>();
-  // const [modalIsOpen, setIsOpen] = useState(false);
-
-  // function handleCloseModal() {
-  //   setIsOpen(false);
-  // }
-
-  // async function handleOpenModal(id: string) {
+  // async function handleRefresh() {
   //   const api = ApiClient();
 
-  //   const response = await api.get('/api/orders/detail', {
-  //     params: {
-  //       order_id: id,
-  //     }
-  //   })
-
-  //   setModalItem(response.data);
-
-  //   setIsOpen(true);
-  // }
-
-  // async function handleFinishItem(id: string) {
-  //   const api = ApiClient();
-
-  //   await api.put('/api/orders/end', {
-  //     order_id: id,
-  //   }) 
-
-  //   const response = await api.get('/api/orders/list');
+  //   const response = await api.get('/api/orders/list')
 
   //   setOrdersList(response.data);
-
-  //   setIsOpen(false);
   // }
-
-  async function handleRefresh() {
-    const api = ApiClient();
-
-    const response = await api.get('/api/orders/list')
-
-    setOrdersList(response.data);
-  }
 
   Modal.setAppElement('#__next');
 
@@ -106,31 +47,6 @@ export default function Dashboard({ orders }: OrdersProps) {
       </Head>
       <div>
         <Header />
-        
-        {/* <main className={styles.container}>
-          <div className={styles.containerHeader}>
-            <h1 className={styles.title}>Últimos pedidos</h1>
-            <button onClick={handleRefresh}>
-              <FiRefreshCcw color="#EA1D2C" size={25}/>
-            </button>
-          </div>
-
-          <article className={styles.orders}>
-
-            {ordersList.map(item => (
-              <section key={item.id} className={styles.orderItem}>
-                <button onClick={() => handleOpenModal(item.id)}>
-                  <p>Nº da Mesa: { item.table }</p> 
-                </button>
-              </section>
-            ))}
-
-            {ordersList.length === 0 && (
-              <span className={styles.empty}>Não tem pedidos</span>
-            )}
-
-          </article>
-        </main> */}
 
         <div className={styles.content}>
           <div className={styles.title}>
@@ -142,9 +58,9 @@ export default function Dashboard({ orders }: OrdersProps) {
 
           <div className={styles.blockRefresh}>
             <h1 className={styles.requests}>Pedidos</h1>
-            <button onClick={handleRefresh}>
+            {/* <button onClick={handleRefresh}>
               <FiRefreshCcw color="#EA1D2C" size={28}/>
-            </button>
+            </button> */}
           </div>
 
           <article className={styles.orders}>
@@ -165,16 +81,6 @@ export default function Dashboard({ orders }: OrdersProps) {
 
           </div>
         </div>
-
-        {/* {modalIsOpen && (
-          <ModalOrder
-            isOpen={modalIsOpen}
-            onRequestClose={handleCloseModal}
-            order={modaItem}
-            handleFinishOrder={handleFinishItem}
-          />
-        )} */}
-
       </div>
     </>
   )
