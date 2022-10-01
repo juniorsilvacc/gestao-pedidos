@@ -3,36 +3,6 @@
   padding: 1px 16px;
 }
 
-.title{
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.category {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 400px;
-  padding: 2rem 0 2rem 0;
-}
-
-.category form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .creationCategory {
   display: flex;
   justify-content: flex-end;
@@ -78,6 +48,7 @@
   background-color: #FEC447;
   margin-right: 5px;
   border-radius: 3px;
+  transition: filter 300ms;
 }
 
 .table td .actionDelete{
@@ -87,7 +58,14 @@
   display: inline-block;
   background-color: var(--red);
   border-radius: 3px;
+  transition: filter 300ms;
 }
+
+.table td .actionUpdate:hover,
+.table td .actionDelete:hover{
+  filter: brightness(1.08);
+}
+
 
 .table td .actionUpdate svg,
 .table td .actionDelete svg {

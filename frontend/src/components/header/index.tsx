@@ -27,7 +27,7 @@ export default function Header() {
         </a>
       </Link>
 
-      <Link href="/category">
+      <Link href="/categories">
         <a>
           <BiCategory color="#FFF" size={24} />
           Categorias
@@ -41,7 +41,7 @@ export default function Header() {
         </a>
       </Link>
 
-      <Link href="/user">
+      <Link href="/add-user">
         <a>
           <FiUserPlus color="#FFF" size={24} />
           Usuários

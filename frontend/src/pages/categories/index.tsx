@@ -1,9 +1,10 @@
-import { FormEvent, useState, ReactNode } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import styles from './styles.module.css';
+import Link from "next/link";
 
 import { BiCategory } from 'react-icons/bi';
-import { FiUpload, FiDelete } from 'react-icons/fi';
+import { FiEdit2, FiDelete } from 'react-icons/fi';
 
 // Components
 import Header from '../../components/header';
@@ -16,6 +17,7 @@ import { toast } from "react-toastify";
 // Utils
 import { SSRAuth } from '../../utils/SSRAuth';
 
+// Api
 import { ApiClient } from '../../services/api';
 
 type ListCategoriesProps = {
@@ -29,47 +31,15 @@ interface CategoriesProps {
   categories: ListCategoriesProps[];
 }
 
-
-export default function Category({categories}: CategoriesProps) {
+export default function Categories({categories}: CategoriesProps) {
   const [categoriesList, setCategoriesList] = useState(categories || [])
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-
   const [loading, setLoading] = useState(false);
-
-  async function handleCreateCategory(e: FormEvent) {
-    e.preventDefault();
-    
-    try {
-      if (name === '' || description === '') {
-        return toast.warning("Preencha os campo");
-      }
-
-      setLoading(true);
-
-      const api = ApiClient(); 
-      await api.post("/api/categories/create", {
-        name,
-        description
-      });
-
-      toast.success("Categoria cadastrada com sucesso");
-
-      setLoading(false);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      setLoading(false);
-    }
-
-    setName('');
-    setDescription('');
-  }
 
   return (
     <>
       <Head>
-        <title>Gestão de Pedidos - Cadastrar Categoria</title>
+        <title>Gestão de Pedidos - Categorias</title>
       </Head>
       <Header />
       
@@ -84,7 +54,9 @@ export default function Category({categories}: CategoriesProps) {
             type="submit"
             Loading={loading}
           >
+            <Link href="/add-category">
             Nova Categoria
+            </Link>
           </Button>
         </div>
 
@@ -109,7 +81,7 @@ export default function Category({categories}: CategoriesProps) {
                 </td>
                 <td data-label="#">
                   <button className={styles.actionUpdate}>
-                    <FiUpload color="#FFF" size={20} />
+                    <FiEdit2 color="#FFF" size={20} />
                   </button>
                   <button className={styles.actionDelete}>
                     <FiDelete color="#FFF" size={20} />
@@ -119,35 +91,6 @@ export default function Category({categories}: CategoriesProps) {
             ))}
           </tbody>
         </table>
-
-        {/* <main className={styles.container}>
-          <h1 className={styles.title}>Criar Categoria</h1>
-          
-          <div className={styles.category}>
-            <form onSubmit={handleCreateCategory}>
-              <Input
-                placeholder="Nome"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-
-              <Input
-                placeholder="Descrição"
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-
-              <Button
-                type="submit"
-                Loading={loading}
-              >
-                Cadastrar
-              </Button>
-            </form>
-          </div>
-        </main> */}
       </div>
     </>
   )
