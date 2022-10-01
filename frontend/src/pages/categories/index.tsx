@@ -8,7 +8,7 @@ import { FiEdit2, FiDelete } from 'react-icons/fi';
 
 // Components
 import Header from '../../components/header';
-import Button from '../../components/forms/Button';
+
 import Title from "../../components/title";
 
 // Hooks
@@ -31,10 +31,21 @@ interface CategoriesProps {
   categories: ListCategoriesProps[];
 }
 
-export default function Categories({categories}: CategoriesProps) {
+export default function ListCategories({categories}: CategoriesProps) {
   const [categoriesList, setCategoriesList] = useState(categories || [])
 
-  const [loading, setLoading] = useState(false);
+  async function handleRemoveCategory(id: string){
+    const api = ApiClient(); 
+
+    await api.delete(`/api/categories/remove/${id}`);
+
+    alert("Deseja excluir essa categoria?")
+
+    toast.success("Categoria excluida");
+
+    const response = await api.get("/api/categories/list");
+    setCategoriesList(response.data);
+  }
 
   return (
     <>
@@ -50,14 +61,9 @@ export default function Categories({categories}: CategoriesProps) {
         </Title>
 
         <div className={styles.creationCategory}>
-          <Button
-            type="submit"
-            Loading={loading}
-          >
-            <Link href="/add-category">
+          <Link href="/add-category">
             Nova Categoria
-            </Link>
-          </Button>
+          </Link>
         </div>
 
         <table className={styles.table}>
@@ -83,7 +89,7 @@ export default function Categories({categories}: CategoriesProps) {
                   <button className={styles.actionUpdate}>
                     <FiEdit2 color="#FFF" size={20} />
                   </button>
-                  <button className={styles.actionDelete}>
+                  <button className={styles.actionDelete} onClick={() => handleRemoveCategory(category.id)}>
                     <FiDelete color="#FFF" size={20} />
                   </button>
                 </td>

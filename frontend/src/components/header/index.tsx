@@ -23,41 +23,41 @@ export default function Header() {
       <Link href="/dashboard">
         <a>
         <FiHome color="#FFF" size={24}/>
-        Home
+          Home
         </a>
       </Link>
 
       <Link href="/categories">
         <a>
           <BiCategory color="#FFF" size={24} />
-          Categorias
+            Categorias
         </a>
       </Link>
 
       <Link href="/products">
         <a>
           <MdProductionQuantityLimits color="#FFF" size={24} />
-          Produtos
+            Produtos
         </a>
       </Link>
 
       <Link href="/add-user">
         <a>
           <FiUserPlus color="#FFF" size={24} />
-          Usuários
+            Usuários
         </a>
       </Link>
 
       <Link href="/profile">
         <a>
           <FiSettings color="#FFF" size={24} />
-          Configurações
+            Configurações
         </a>
       </Link>
     
       <a onClick={logout} className={styles.button}>
         <FiLogOut color="#FFF" size={24} />
-        Sair
+          Sair
       </a>
     </div>  
   )

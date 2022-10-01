@@ -8,6 +8,21 @@
   justify-content: flex-end;
 }
 
+.creationCategory a {
+  padding: .8rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  background: var(--red);
+  transition: filter 300ms;
+  color: #FFF;
+  transition: filter 300ms;
+}
+
+.creationCategory a:hover{
+  filter: brightness(1.08);
+}
+
 .table  {
   margin: 0;
   padding: 0;
