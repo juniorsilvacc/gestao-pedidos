@@ -26,15 +26,15 @@ type LoginProps = {
   password: string;
 }
 
-type AuthProviderProps = {
-  children: ReactNode;
-}
-
 type RegisterProps = {
   name: string;
   email: string;
   cpf: string;
   password: string;
+}
+
+type AuthProviderProps = {
+  children: ReactNode;
 }
 
 export const AuthContext = createContext({} as AuthContextData)

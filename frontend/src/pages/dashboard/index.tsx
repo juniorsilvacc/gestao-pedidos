@@ -8,12 +8,14 @@ import { FiHome, FiRefreshCcw } from 'react-icons/fi';
 
 // Components
 import Header from '../../components/header';
+import Title from "../../components/title";
 
 // Utils
 import { SSRAuth } from '../../utils/SSRAuth';
 
 // Api
 import { ApiClient } from '../../services/api';
+
 
 type ListOrdersProps = {
   id: string;
@@ -49,15 +51,15 @@ export default function Dashboard({ orders }: OrdersProps) {
         <Header />
 
         <div className={styles.content}>
-          <div className={styles.title}>
+          
+          <Title name="Home">
             <FiHome color="#000" size={24} />
-            <h1>Home</h1>
-          </div>
+          </Title>
 
           <div className={styles.container}>
 
           <div className={styles.blockRefresh}>
-            <h1 className={styles.requests}>Pedidos</h1>
+            <h1 className={styles.title}>Pedidos</h1>
             {/* <button onClick={handleRefresh}>
               <FiRefreshCcw color="#EA1D2C" size={28}/>
             </button> */}

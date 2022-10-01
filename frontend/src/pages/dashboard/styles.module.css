@@ -3,26 +3,10 @@
   padding: 1px 16px;
 }
 
-.title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 1rem 0;
-  border-radius: 20px;
-  background-color: #fff;
-  border: 1px solid rgb(218, 217, 217);
-  padding: .8rem;
-}
-
-.title {
-  margin-left: 1rem;
-  font-size: 1rem;
-}
-
-.title h1 {
-  font-size: 20px;
-  font-weight: 500;
-  margin-left: 16px;
+.title{
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .blockRefresh{
@@ -38,11 +22,6 @@
   border: 1px solid rgb(161, 161, 161);
   padding: 3px;
   border-radius: 3px;
-}
-
-.requests{
-  text-align: center;
-  font-size: 2rem;
 }
 
 .orders{

@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Header from '../../components/header'
 import Button from '../../components/forms/Button';
 import Input from '../../components/forms/Input';
+import Title from '../../components/title';
 
 export default function User() {
   const { register } = useContext(AuthContext);
@@ -50,13 +51,13 @@ export default function User() {
         <Header />
 
         <div className={styles.content}>
-          <div className={styles.title}>
+
+          <Title name="Usuário">
             <FiUserPlus color="#000" size={24} />
-            <h1>Usuários</h1>
-          </div>
+          </Title>
 
           <div className={styles.container}>
-            <h1 className={styles.titlePageUser}>Cadastrar Usuário</h1>
+            <h1 className={styles.title}>Cadastrar Usuário</h1>
 
             <div className={styles.login}>
               <form onSubmit={handleRegister}>

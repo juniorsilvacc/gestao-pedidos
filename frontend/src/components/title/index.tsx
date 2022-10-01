@@ -1,7 +1,12 @@
 import React, { ReactNode } from 'react';
 import styles from './styles.module.css';
 
-export default function Title({children, name}) {
+interface TitleProps {
+  name: string,
+  children: ReactNode,
+}
+
+export default function Title({children, name}: TitleProps) {
   return (
     <div className={styles.title}>
       {children}
