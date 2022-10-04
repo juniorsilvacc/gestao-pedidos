@@ -13,10 +13,8 @@ import Button from '../../components/forms/Button';
 // Hooks
 import { toast } from "react-toastify";
 
-// Utils
-import { SSRAuth } from '../../utils/SSRAuth';
-
-import { ApiClient } from '../../services/api';
+// API
+import { getAPIClient } from "../../services/axios";
 
 type ListProps = {
   id: string;
@@ -74,7 +72,7 @@ export default function Product({ categoryList }: CategoryProps) {
       data.append('category_id', categories[categorySelect].id)
       data.append('image', imgPreview)
 
-      const api = ApiClient();
+      const api = getAPIClient();
       await api.post("/api/products/create", data);
       
       toast.success("Produto cadastrada com sucesso");
@@ -173,15 +171,3 @@ export default function Product({ categoryList }: CategoryProps) {
     </>
   )
 }
-
-export const getServerSideProps = SSRAuth(async (context) => {
-  // const api = ApiClient(context); 
-
-  // const response = await api.get("/api/categories/list");
-  
-  return {
-    props: {
-      // categoryList: response.data
-    }
-  }
-})

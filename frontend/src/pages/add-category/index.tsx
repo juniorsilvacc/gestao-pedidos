@@ -12,7 +12,7 @@ import Button from '../../components/forms/Button';
 import Input from '../../components/forms/Input';
 
 // Api
-import { ApiClient } from '../../services/api';
+import { getAPIClient } from "../../services/axios";
 
 export default function AddCategory() {
   const [name, setName] = useState('');
@@ -30,7 +30,7 @@ export default function AddCategory() {
 
       setLoading(true);
 
-      const api = ApiClient(); 
+      const api = getAPIClient(); 
       await api.post("/api/categories/create", {
         name,
         description

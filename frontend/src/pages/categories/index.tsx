@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { parseCookies } from "nookies";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
-import styles from './styles.module.css';
 import Link from "next/link";
+import styles from './styles.module.css';
 
 import { BiCategory } from 'react-icons/bi';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
@@ -14,11 +16,8 @@ import Title from "../../components/title";
 // Hooks
 import { toast } from "react-toastify";
 
-// Utils
-import { SSRAuth } from '../../utils/SSRAuth';
-
 // Api
-import { ApiClient } from '../../services/api';
+import { getAPIClient } from "../../services/axios";
 
 type ListCategoriesProps = {
   id: string;
@@ -35,7 +34,7 @@ export default function ListCategories({categories}: CategoriesProps) {
   const [categoriesList, setCategoriesList] = useState(categories || [])
 
   async function handleRemoveCategory(id: string){
-    const api = ApiClient(); 
+    const api = getAPIClient(); 
 
     await api.delete(`/api/categories/remove/${id}`);
 
@@ -102,8 +101,18 @@ export default function ListCategories({categories}: CategoriesProps) {
   )
 }
 
-export const getServerSideProps = SSRAuth(async (context) => {
-  const api = ApiClient(context);
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const api = getAPIClient(ctx);
+  const { ['@auth.token']: token } = parseCookies(ctx)
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
 
   const response = await api.get('/api/categories/list');
 
@@ -112,4 +121,4 @@ export const getServerSideProps = SSRAuth(async (context) => {
       categories: response.data
     }
   }
-})
+}

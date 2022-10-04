@@ -1,5 +1,5 @@
 import { useContext, FormEvent, useState } from 'react';
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,8 +17,9 @@ import { toast } from 'react-toastify';
 
 // Utils
 import { SSRGuest } from '../utils/SSRGuest'
+import { parseCookies } from 'nookies';
 
-const Home: NextPage = () => {
+export default function Home() {
   const { login } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
@@ -84,10 +85,21 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx);
 
-export const getServerSideProps = SSRGuest(async (context) => {
-  return {
-    props: {}
+  // Se tentar acessar a página já logado, tenho que redirecionar para a página /dashboard
+  if (cookies["@auth.token"]) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
   }
-})
+
+  return {
+    props: {
+    }
+  }
+}

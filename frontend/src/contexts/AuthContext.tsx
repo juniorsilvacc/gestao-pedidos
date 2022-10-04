@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import Router from 'next/router';
 
-import { api } from '../services/apiClient';  
+import { api } from "../services/api"; 
 
 type AuthContextData = {
   user: UserProps | undefined;

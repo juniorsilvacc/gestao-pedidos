@@ -8,8 +8,8 @@ import Header from '../../components/header';
 // Utils
 import { SSRAuth } from '../../utils/SSRAuth';
 
-// api
-import { ApiClient } from '../../services/api';
+// Api
+import { getAPIClient } from "../../services/axios";
 
 type ListProductsProps = {
   id: string;
@@ -57,16 +57,4 @@ export default function Products({ products }: ProductsProps) {
     </>
   )
 }
-
-export const getServerSideProps = SSRAuth(async (context) => {
-  // const api = ApiClient(context)
-
-  // const response = await api.get("/api/products/category");
-
-  return {
-    props: {
-      // products: response.data
-    }
-  }
-})
 

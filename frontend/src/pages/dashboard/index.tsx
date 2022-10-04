@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { parseCookies } from "nookies";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import styles from "./styles.module.css";
 import Modal from 'react-modal';
@@ -11,12 +13,8 @@ import { MdOutlineFastfood } from 'react-icons/md';
 import Header from '../../components/header';
 import Title from "../../components/title";
 
-// Utils
-import { SSRAuth } from '../../utils/SSRAuth';
-
 // Api
-import { ApiClient } from '../../services/api';
-
+import { getAPIClient } from "../../services/axios";
 
 type ListOrdersProps = {
   id: string;
@@ -89,14 +87,24 @@ export default function Dashboard({ orders }: OrdersProps) {
   )
 }
 
-export const getServerSideProps = SSRAuth(async (context) => {
-  const api = ApiClient(context)
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const apiClient = getAPIClient(ctx);
+  const { ['@auth.token']: token } = parseCookies(ctx)
 
-  const response = await api.get("/api/orders/list");
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      }
+    }
+  }
+
+  const response = await apiClient.get('/api/orders/list')
 
   return {
     props: {
       orders: response.data
     }
   }
-})
+}
