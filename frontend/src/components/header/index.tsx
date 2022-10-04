@@ -3,8 +3,8 @@ import styles from './styles.module.css';
 import Link from 'next/link';
 import Image from "next/image";
 
-import { FiHome, FiLogOut, FiSettings, FiUserPlus } from 'react-icons/fi';
-import { MdProductionQuantityLimits } from 'react-icons/md';
+import { FiLogOut, FiSettings, FiUserPlus } from 'react-icons/fi';
+import { MdProductionQuantityLimits, MdOutlineFastfood } from 'react-icons/md';
 import { BiCategory } from 'react-icons/bi';
 
 import avatarNull from '../../../public/avatar.jpg';
@@ -22,8 +22,8 @@ export default function Header() {
 
       <Link href="/dashboard">
         <a>
-        <FiHome color="#FFF" size={24}/>
-          Home
+        <MdOutlineFastfood color="#FFF" size={24}/>
+          Pedidos
         </a>
       </Link>
 

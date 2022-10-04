@@ -52,7 +52,7 @@ export default function User() {
 
         <div className={styles.content}>
 
-          <Title name="Usuário">
+          <Title name="Usuários">
             <FiUserPlus color="#000" size={24} />
           </Title>
 

@@ -4,7 +4,8 @@ import styles from "./styles.module.css";
 import Modal from 'react-modal';
 
 // Icons
-import { FiHome, FiRefreshCcw } from 'react-icons/fi';
+import { FiHome } from 'react-icons/fi';
+import { MdOutlineFastfood } from 'react-icons/md';
 
 // Components
 import Header from '../../components/header';
@@ -52,8 +53,8 @@ export default function Dashboard({ orders }: OrdersProps) {
 
         <div className={styles.content}>
           
-          <Title name="Home">
-            <FiHome color="#000" size={24} />
+          <Title name="Pedidos">
+            <MdOutlineFastfood color="#000" size={24} />
           </Title>
 
           <div className={styles.container}>
