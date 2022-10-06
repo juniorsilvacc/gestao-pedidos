@@ -10,7 +10,6 @@ import { FiEdit2, FiDelete } from 'react-icons/fi';
 
 // Components
 import Header from '../../components/header';
-
 import Title from "../../components/title";
 
 // Hooks
@@ -85,9 +84,11 @@ export default function ListCategories({categories}: CategoriesProps) {
                   )}
                 </td>
                 <td data-label="#">
-                  <button className={styles.actionUpdate}>
-                    <FiEdit2 color="#FFF" size={20} />
-                  </button>
+                  <Link href={`/update-category/${category.id}`}>
+                    <button className={styles.actionUpdate}>
+                      <FiEdit2 color="#FFF" size={20} />
+                    </button>
+                  </Link>
                   <button className={styles.actionDelete} onClick={() => handleRemoveCategory(category.id)}>
                     <FiDelete color="#FFF" size={20} />
                   </button>

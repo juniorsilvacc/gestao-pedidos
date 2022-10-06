@@ -5,10 +5,7 @@ import Head from "next/head";
 // Components
 import Header from '../../components/header';
 
-// Utils
-import { SSRAuth } from '../../utils/SSRAuth';
-
-// Api
+// API
 import { getAPIClient } from "../../services/axios";
 
 type ListProductsProps = {

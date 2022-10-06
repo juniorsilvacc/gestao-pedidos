@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 import Modal from 'react-modal';
 
 // Icons
-import { FiHome } from 'react-icons/fi';
+import { FiRefreshCcw } from 'react-icons/fi';
 import { MdOutlineFastfood } from 'react-icons/md';
 
 // Components
@@ -31,13 +31,13 @@ interface OrdersProps {
 export default function Dashboard({ orders }: OrdersProps) {
   const [ordersList, setOrdersList] = useState(orders || []);
 
-  // async function handleRefresh() {
-  //   const api = ApiClient();
+  async function handleRefresh() {
+    const api = getAPIClient();
 
-  //   const response = await api.get('/api/orders/list')
+    const response = await api.get('/api/orders/list')
 
-  //   setOrdersList(response.data);
-  // }
+    setOrdersList(response.data);
+  }
 
   Modal.setAppElement('#__next');
 
@@ -59,9 +59,9 @@ export default function Dashboard({ orders }: OrdersProps) {
 
           <div className={styles.blockRefresh}>
             <h1 className={styles.title}>Pedidos</h1>
-            {/* <button onClick={handleRefresh}>
-              <FiRefreshCcw color="#EA1D2C" size={28}/>
-            </button> */}
+            <button onClick={handleRefresh}>
+              <FiRefreshCcw color="#EA1D2C" size={22}/>
+            </button>
           </div>
 
           <article className={styles.orders}>
