@@ -10,6 +10,7 @@ import {
   removeCategoryValidation,
 } from '../validations/categories-validations';
 import { RemoveCategoryController } from '../../../modules/categories/useCases/RemoveCategory/remove-category-controller';
+import { ShowCategoryController } from '../../../modules/categories/useCases/ShowCategory/show-category-controller';
 
 const categoriesRouter = Router();
 
@@ -17,6 +18,7 @@ const createCategoryController = new CreateCategoryController();
 const listCategoriesController = new ListCategoriesController();
 const updateCategoryController = new UpdateCategoryController();
 const removeCategoryController = new RemoveCategoryController();
+const showCategoryController = new ShowCategoryController();
 
 categoriesRouter.post(
   '/create',
@@ -47,6 +49,13 @@ categoriesRouter.delete(
   ensureAdmin,
   removeCategoryValidation,
   removeCategoryController.handle,
+);
+
+categoriesRouter.get(
+  '/show/:id',
+  ensureAuthenticate,
+  ensureAdmin,
+  showCategoryController.handle,
 );
 
 export { categoriesRouter };
