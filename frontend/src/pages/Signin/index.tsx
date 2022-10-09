@@ -31,12 +31,12 @@ export default function SignIn() {
     e.preventDefault();
 
     if (email === '' || password === '') {
-      return toast.warning("Preencha todos os campos.")
+      return toast.warning("Preencha todos os campos")
     }
 
     await login({ email, password });
 
-    toast.success("Seu login foi feito com sucesso.");
+    toast.success("Seu login foi feito com sucesso");
 
     navigate("/admin/dashboard");
 

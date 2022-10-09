@@ -6,6 +6,8 @@ import Dasboard from '../pages/Dasboard';
 import Categories from "../pages/Categories";
 import AddCategory from "../pages/Add-Category/index";
 import UpdateCategory  from "../pages/Update-Category/index";
+import NotFound from "../pages/NotFound";
+import AddUser from "../pages/Add-User";
 
 
 // @ts-ignore
@@ -22,6 +24,10 @@ export default function AppRoutes() {
       <Route path="/admin/categorias" element={<Private redirectTo="/login"><Categories /></Private>} />
       <Route path="/admin/adicionar-categoria" element={<Private redirectTo="/login"><AddCategory /></Private>} />
       <Route path="/admin/atualizar-categoria/:id" element={<Private redirectTo="/login"><UpdateCategory /></Private>} />
+      <Route path="/admin/add-usuario" element={<Private redirectTo="/login"><AddUser /></Private>} />
+      
+      <Route path="/404" element={<NotFound />} />
+      <Route path="/*" element={<Navigate to="/404" />} />
     </Routes>
   )
 }

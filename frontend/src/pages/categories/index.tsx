@@ -27,9 +27,13 @@ export default function Categories() {
   const [categories, setCategories] = useState<ICategoriesProps[]>([] as ICategoriesProps[]);
 
   useEffect(() => {
-    api.get("/api/categories/list").then((response) => {
-      setCategories(response.data);
-    })
+    async function loadsCategories() {
+      api.get("/api/categories/list").then((response) => {
+        setCategories(response.data);
+      })
+    }
+
+    loadsCategories();
   }, []);
 
   async function handleDelete(id: string): Promise<void>{

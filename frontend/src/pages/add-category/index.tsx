@@ -47,7 +47,6 @@ export default function AddCategory() {
       navigate("/admin/categorias");
     } catch (error) {
       toast.error("Ocorreu um erro ao cadastrar categoria.");
-      setLoading(false);
     }
 
     setName('');
