@@ -11,10 +11,8 @@
 :root{
   --white: #FFF;
   --black: #000;
-
   --grenn: #3FFFA3;
   --red: #EA1D2C;
-
   --background: #F7F7F7;
   --gray: #D2D2D2;
 }
@@ -34,6 +32,11 @@ body{
 
 body, input, textarea, select, button{
   font: 400 1rem 'Roboto', sans-serif;
+}
+
+.content {
+  margin-left: 300px;
+  padding: 1px 16px;
 }
 
 @media (max-width: 720px){

@@ -1,4 +1,5 @@
-import React, { useState, FormEvent } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
+import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 // Styles
@@ -17,41 +18,54 @@ import Button from '../../components/Button';
 // API
 import api from '../../services/api';
 
-export default function AddCategory() {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+interface ICategoryProps {
+  name: string;
+  description: string;
+}
+
+export default function UpdateCategory() {
+  const navigate = useNavigate();
+
+  const [category, setCategory] = useState<ICategoryProps>({} as ICategoryProps);
 
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCategory({ ...category, [e.target.name]: e.target.value });
+  };
 
-  async function handleCreate(e: FormEvent) {
-    e.preventDefault();
+  const { id } = useParams();
+
+  useEffect(() => {
+    async function loadCategory() {
+      api.get(`/api/categories/show/${id}`).then((response) => {
+        setCategory(response.data);
+      });
+    }
     
+    loadCategory();
+  }, [id]);
+
+  async function handleEdit(e: FormEvent) {  
     try {
-      if (name === '' || description === '') {
-        return toast.warning("Preencha os campo");
-      }
+      e.preventDefault();
 
       setLoading(true);
 
-      await api.post("/api/categories/create", {
-        name,
-        description
-      });
+      const { name, description } = category;
 
-      toast.success("Categoria cadastrada");
+      const data = { name, description };
+      
+      await api.patch(`/api/categories/update/${id}`, data);
+
+      toast.success("Categoria atualizada");
 
       setLoading(false);
-
       navigate("/admin/categorias");
     } catch (error) {
-      toast.error("Ocorreu um erro ao cadastrar categoria.");
+      toast.error("Ocorreu um erro ao atualizar categoria.");
       setLoading(false);
     }
-
-    setName('');
-    setDescription('');
   }
 
   return (
@@ -64,31 +78,31 @@ export default function AddCategory() {
         </Title>
 
         <main className={styles.container}>
-          <h1 className={styles.title}>Criar Categoria</h1>
+          <h1 className={styles.title}>Atualizar Categoria</h1>
           
           <div className={styles.category}>
-            <form onSubmit={handleCreate}>
+            <form onSubmit={handleEdit}>
               <Input
                 placeholder="Nome"
                 type="text"
                 name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={category.name || ""}
+                onChange={handleChange}
               />
 
               <Input
                 placeholder="Descrição"
                 type="text"
                 name="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={category.description || ""}
+                onChange={handleChange}
               />
 
               <Button
                 type="submit"
                 loading={loading}
               >
-                Cadastrar
+                Atualizar
               </Button>
             </form>
           </div>

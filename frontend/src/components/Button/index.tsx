@@ -5,17 +5,17 @@ import styles from './styles.module.css';
 import { FaSpinner } from 'react-icons/fa'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-  Loading?: boolean,
+  loading?: boolean,
   children: ReactNode,
 }
 
-function Button({Loading, children, ...rest}: ButtonProps) {
+function Button({loading, children, ...rest}: ButtonProps) {
   return <button
     className={styles.button}
-    disabled={Loading}
+    disabled={loading}
     {...rest}
   >
-    { Loading ? (
+    { loading ? (
       <FaSpinner color="#FFF" size={16}/>
     ) : (
       <a className={styles.buttonText}>

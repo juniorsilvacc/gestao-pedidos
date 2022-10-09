@@ -1,4 +1,9 @@
-.header{
+.content {
+  margin-left: 300px;
+  padding: 1px 16px;
+}
+
+.header {
   margin: 0;
   padding: 0;
   width: 300px;
@@ -25,8 +30,8 @@
   border-radius: 50%;
   display: block;
   margin: auto;
-  width: 90px;
-  height: 90px;
+  width: 160px;
+  height: 160px;
   text-align: center;
   object-fit: cover;
 }
@@ -34,7 +39,7 @@
 .header a {
   display: block;
   color: #FFF;
-  padding: 16px;
+  padding: 22px;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -43,7 +48,7 @@
 }
 
 .header a svg{
-  margin-right: .5rem;
+  margin-right: .6rem;
 }
 
 .header a:hover{
@@ -53,11 +58,6 @@
 
 .header .button {
   cursor: pointer;
-}
-
-.content {
-  margin-left: 300px;
-  padding: 1px 16px;
 }
 
 @media screen and (max-width: 768px) {

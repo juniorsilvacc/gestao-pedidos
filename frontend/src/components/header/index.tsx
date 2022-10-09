@@ -1,15 +1,19 @@
 import { useContext } from 'react';
-import styles from './styles.module.css';
-import Link from 'next/link';
-import Image from "next/image";
+import { Link } from 'react-router-dom';
 
+// Styles
+import styles from './styles.module.css';
+
+// Icons
 import { FiLogOut, FiSettings, FiUserPlus } from 'react-icons/fi';
 import { MdProductionQuantityLimits, MdOutlineFastfood } from 'react-icons/md';
 import { BiCategory } from 'react-icons/bi';
 
-import avatarNull from '../../../public/avatar.jpg';
+// Img
+import avatar from '../../assets/avatar.jpg';
 
-import { AuthContext } from '../../contexts/AuthContext';
+// Context
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Header() {
   const { logout, user } = useContext(AuthContext);
@@ -17,46 +21,38 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <div>
-        <Image width={150} height={150} src={avatarNull} alt="Foto Avatar" />
+        <img src={avatar} alt="Foto Avatar" />
+        {/* <img src={user.avatar_url === null ? avatar : user.avatar_url} alt="Foto Avatar" /> */}
+        {/* <img src={user.email} alt="" /> */}
       </div>
 
-      <Link href="/dashboard">
-        <a>
-        <MdOutlineFastfood color="#FFF" size={24}/>
+      <Link to="/admin/dashboard">
+        <MdOutlineFastfood color="#FFF" size={22}/>
           Pedidos
-        </a>
       </Link>
 
-      <Link href="/categories">
-        <a>
-          <BiCategory color="#FFF" size={24} />
-            Categorias
-        </a>
+      <Link to="/admin/categorias">
+        <BiCategory color="#FFF" size={22} />
+          Categorias
       </Link>
 
-      <Link href="/products">
-        <a>
-          <MdProductionQuantityLimits color="#FFF" size={24} />
-            Produtos
-        </a>
+      <Link to="/admin/produtos">
+        <MdProductionQuantityLimits color="#FFF" size={22} />
+          Produtos
       </Link>
 
-      <Link href="/add-user">
-        <a>
-          <FiUserPlus color="#FFF" size={24} />
-            Usuários
-        </a>
+      <Link to="/admin/add-usuario">
+        <FiUserPlus color="#FFF" size={22} />
+          Usuários
       </Link>
 
-      <Link href="/profile">
-        <a>
-          <FiSettings color="#FFF" size={24} />
-            Configurações
-        </a>
+      <Link to="/admin/perfil">
+        <FiSettings color="#FFF" size={22} />
+          Configurações
       </Link>
     
       <a onClick={logout} className={styles.button}>
-        <FiLogOut color="#FFF" size={24} />
+        <FiLogOut color="#FFF" size={22} />
           Sair
       </a>
     </div>  
