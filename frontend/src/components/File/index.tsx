@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 // Icons
 import { FiUpload } from 'react-icons/fi';

@@ -13,14 +13,14 @@ import swaggerFile from './swagger.json';
 
 const app = express();
 
-app.use(rateLimiter);
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+
+app.use(rateLimiter);
 
 app.use(router);
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
 
 // Pages
@@ -10,7 +11,6 @@ import NotFound from "../pages/NotFound";
 import AddUser from "../pages/Add-User";
 import Products from "../pages/Products";
 import AddProduct from "../pages/Add-Product";
-
 
 // @ts-ignore
 const Private = ({ children, redirectTo }) => {

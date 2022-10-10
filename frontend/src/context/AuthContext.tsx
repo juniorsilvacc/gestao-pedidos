@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState, useEffect, useCallback, useContext } from 'react'
+import React, { ReactNode, createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -84,9 +84,3 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   )
 }
-
-// export function logout () {
-//   localStorage.removeItem('@auth: token');
-//   toast.success("Seu usuário foi feito deslogado.");
-  
-// };
