@@ -8,6 +8,8 @@ import AddCategory from "../pages/Add-Category/index";
 import UpdateCategory  from "../pages/Update-Category/index";
 import NotFound from "../pages/NotFound";
 import AddUser from "../pages/Add-User";
+import Products from "../pages/Products";
+import AddProduct from "../pages/Add-Product";
 
 
 // @ts-ignore
@@ -24,7 +26,9 @@ export default function AppRoutes() {
       <Route path="/admin/categorias" element={<Private redirectTo="/login"><Categories /></Private>} />
       <Route path="/admin/adicionar-categoria" element={<Private redirectTo="/login"><AddCategory /></Private>} />
       <Route path="/admin/atualizar-categoria/:id" element={<Private redirectTo="/login"><UpdateCategory /></Private>} />
-      <Route path="/admin/add-usuario" element={<Private redirectTo="/login"><AddUser /></Private>} />
+      <Route path="/admin/adicionar-usuario" element={<Private redirectTo="/login"><AddUser /></Private>} />
+      <Route path="/admin/produtos" element={<Private redirectTo="/login"><Products /></Private>} />
+      <Route path="/admin/adicionar-produto" element={<Private redirectTo="/login"><AddProduct /></Private>} />
       
       <Route path="/404" element={<NotFound />} />
       <Route path="/*" element={<Navigate to="/404" />} />

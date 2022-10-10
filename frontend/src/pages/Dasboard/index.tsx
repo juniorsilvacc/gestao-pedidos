@@ -26,13 +26,13 @@ export default function Dasboard() {
   const [orders, setOrders] = useState<IOrdersProps[]>([] as IOrdersProps[]);
 
   useEffect(() => {
-    async function loadsCategories() {
+    async function loadsOrders() {
       api.get("/api/orders/list").then((response) => {
         setOrders(response.data);
       });
     }
     
-    loadsCategories();
+    loadsOrders();
   }, []);
 
   return (
@@ -56,20 +56,20 @@ export default function Dasboard() {
           </div>
 
           <article className={styles.orders}>
-          {orders.map(order => (
-            <section key={order.id} className={styles.orderItem}>
-              <button>
-                <div className={styles.tag}>
-                  <span>Nº da Mesa: <b>{order.table}</b></span>
-                </div>
-              </button>
-            </section>
-          ))}
-          
+            {orders.map((order) => (
+              <section key={order.id} className={styles.orderItem}>
+                <button>
+                  <div className={styles.tag}>
+                    <span>Nº da Mesa: <b>{order.table}</b></span>
+                  </div>
+                </button>
+              </section>
+            ))}
+            
 
-          {orders.length === 0 && (
-            <span className={styles.empty}>Não há pedidos</span>
-          )}
+            {orders.length === 0 && (
+              <span className={styles.empty}>Não há pedidos</span>
+            )}
           </article>
 
           </div>

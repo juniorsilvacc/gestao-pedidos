@@ -23,7 +23,6 @@ export default function Header() {
       <div>
         <img src={avatar} alt="Foto Avatar" />
         {/* <img src={user.avatar_url === null ? avatar : user.avatar_url} alt="Foto Avatar" /> */}
-        {/* <img src={user.email} alt="" /> */}
       </div>
 
       <Link to="/admin/dashboard">
@@ -41,7 +40,7 @@ export default function Header() {
           Produtos
       </Link>
 
-      <Link to="/admin/add-usuario">
+      <Link to="/admin/adicionar-usuario">
         <FiUserPlus color="#FFF" size={22} />
           Usuários
       </Link>
