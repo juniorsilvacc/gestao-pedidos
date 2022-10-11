@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, FormEvent } from 'react'
 
 // Styles
 import styles from './styles.module.css';
@@ -77,6 +77,26 @@ export default function Dasboard() {
     setModalVisible(false);
   }
 
+  async function handleReflashOrders(e: FormEvent) {
+    e.preventDefault();
+
+    const response = await api.get("/api/orders/list");
+
+    setOrders(response.data);
+  }
+
+  async function handleConcludeItem(id: string){
+    await api.put("/api/orders/end", {
+      order_id: id,
+    });
+
+    const response = await api.get("/api/orders/list");
+
+    setOrders(response.data);
+
+    setModalVisible(false);
+  }
+
   Modal.setAppElement('#root');
 
   return (
@@ -94,7 +114,7 @@ export default function Dasboard() {
 
           <div className={styles.blockRefresh}>
             <h1 className={styles.title}>Pedidos</h1>
-            <button>
+            <button onClick={handleReflashOrders}>
               <FiRefreshCcw color="#EA1D2C" size={22}/>
             </button>
           </div>
@@ -124,6 +144,7 @@ export default function Dasboard() {
             isOpen={modalVisible}
             onRequestClose={handleCloseModalView}
             order={modalItem}
+            handleConcludeOrder={handleConcludeItem}
           />
         )}
 

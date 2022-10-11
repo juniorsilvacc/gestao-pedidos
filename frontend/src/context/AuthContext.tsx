@@ -34,14 +34,14 @@ type AuthProviderProps = {
   children: ReactNode;
 }
 
-type AuthContextData = {
+interface IAuthContextData {
   user: UserProps;
   login: (credentials: LoginProps) => Promise <void>;
   register: (credentials: RegisterProps) => Promise <void>;
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+export const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const navigate = useNavigate();

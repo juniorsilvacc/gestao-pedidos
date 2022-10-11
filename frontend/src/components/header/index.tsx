@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Styles
@@ -16,13 +16,13 @@ import avatar from '../../assets/avatar.jpg';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function Header() {
-  const { logout, user } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   return (
     <div className={styles.header}>
       <div>
         <img src={avatar} alt="Foto Avatar" />
-        {/* <img src={user.avatar_url === null ? avatar : user.avatar_url} alt="Foto Avatar" /> */}
+        {/* <img src={user.user.avatar === undefined ? avatar : user.user.avatar} alt="Foto Avatar" /> */}
       </div>
 
       <Link to="/admin/dashboard">

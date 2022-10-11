@@ -19,9 +19,10 @@ interface IModalOrderProps {
   isOpen: boolean;
   onRequestClose: () => void;
   order: OrderItemProps[];
+  handleConcludeOrder: (id: string) => void;
 }
 
-export default function ModalOrder({ isOpen, onRequestClose, order }: IModalOrderProps) {
+export default function ModalOrder({ isOpen, onRequestClose, order, handleConcludeOrder }: IModalOrderProps) {
   const customStyle = {
     content: {
       top: '50%',
@@ -63,9 +64,13 @@ export default function ModalOrder({ isOpen, onRequestClose, order }: IModalOrde
             </section>
           ))}
 
-          <button className={styles.concludeOrder} onClick={() => {}}>
-            Finalizar Pedido
-          </button>
+          <div className={styles.buttonAndStatus}>
+            <button className={styles.concludeOrder} onClick={() => handleConcludeOrder(order[0].order_id)}>
+              Finalizar Pedido
+            </button>
+
+            <span className={styles.statusOrder}>Status: {order[0].order.status === true ? 'Concluído' : 'Em Andamento'}</span>
+          </div>
       </div>
     </Modal>
   )
